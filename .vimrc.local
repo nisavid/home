@@ -1,0 +1,178 @@
+" Environment {
+    set term=xterm-256color
+" }
+
+" General {
+    set nohidden
+
+    " restore per-file state on re-open
+    set viewoptions=cursor,folds,slash,unix
+    set viminfo='10,\"100,:20,%,n~/.viminfo
+
+    set sessionoptions=curdir,folds,help,localoptions,tabpages,winsize
+" }
+
+" Vim UI {
+    let g:local_ctermbg_altcolor=((&background == "dark")? "black" : "lightgrey")
+    let g:local_guibg_altcolor=((&background == "dark")? "#073642" : "#eee8d5")
+
+    execute 'highlight ColorColumn ctermbg=' . g:local_ctermbg_altcolor . ' guibg=' . g:local_guibg_altcolor
+    execute 'highlight CursorLine ctermbg=' . g:local_ctermbg_altcolor . ' guibg=' . g:local_guibg_altcolor
+    execute 'highlight CursorColumn ctermbg=' . g:local_ctermbg_altcolor . ' guibg=' . g:local_guibg_altcolor
+
+    set cursorcolumn
+
+    autocmd FileType python,rst,sh setlocal commentstring=#%s
+
+    autocmd FileType python,rst,sh setlocal complete+=t
+" }
+
+" Formatting {
+    set wrap
+
+    autocmd FileType gitcommit setlocal textwidth=72
+    autocmd FileType python,rst,sh setlocal textwidth=79
+    set colorcolumn=+1
+
+    " defined in ~/.vimrc
+    autocmd FileType rst autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+
+    autocmd FileType python,rst,sh setlocal formatoptions-=t
+
+    set tildeop
+" }
+
+" Key (Re)Mappings {
+    nnoremap gj j
+    nnoremap gk k
+    nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+
+    imap OA <C-o>k
+    imap OB <C-o>j
+    imap OC <C-o>l
+    imap OD <C-o>h
+" }
+
+" Plugins {
+    " AutoClose {
+        let g:autoclose_on=0
+        let g:autoclose_vim_commentmode=1
+    " }
+
+    " camelcasemotion {
+        map ;w <Plug>CamelCaseMotion_w
+        map ;b <Plug>CamelCaseMotion_b
+        map ;e <Plug>CamelCaseMotion_e
+    " }
+
+    " Fugitive {
+        nunmap <leader>gs
+        nunmap <leader>gd
+        nunmap <leader>gc
+        nunmap <leader>gb
+        nunmap <leader>gl
+        nunmap <leader>gp
+        nnoremap <silent> <leader>Gs :Gstatus<CR>
+        nnoremap <silent> <leader>Gd :Gdiff<CR>
+        nnoremap <silent> <leader>Gc :Gcommit<CR>
+        nnoremap <silent> <leader>Gb :Gblame<CR>
+        nnoremap <silent> <leader>Gl :Glog<CR>
+        nnoremap <silent> <leader>Gp :Git push<CR>
+    "}
+
+    " indent_guides {
+        let g:indent_guides_auto_colors=0
+        autocmd VimEnter,Colorscheme * :execute ':highlight IndentGuidesEven ctermbg=' . g:local_ctermbg_altcolor . ' guibg=' . g:local_guibg_altcolor
+        autocmd VimEnter,Colorscheme * :execute ':highlight IndentGuidesOdd ctermbg=' . g:local_ctermbg_altcolor . ' guibg=' . g:local_guibg_altcolor
+    " }
+
+    " jedi-vim {
+        let g:jedi#popup_select_first = 0
+    "}
+
+    " neocomplcache {
+        let g:neocomplcache_disable_auto_complete=1
+    " }
+
+    " NERDtree {
+        nunmap <Leader>nt
+        unmap <Leader>e
+    " }
+
+    " nerdtree-tabs {
+        map <Leader>F <Plug>NERDTreeMirrorToggle<CR>
+    " }
+
+    " Preview {
+        let g:PreviewBrowsers="google-chrome,chromium-browser,firefox,opera,epiphany,safari"
+    " }
+
+    " PyMode {
+        let g:pymode_options=0
+
+        let g:pymode_lint_checker="pyflakes,pep8,mccabe"
+        " don't require continuation lines to be indented with multiples of 4
+        " spaces
+        let g:pymode_lint_ignore="E121"
+        " pep8 rejects some reasonable forms of visual indentation
+        let g:pymode_lint_ignore.=",E127"
+        " pep8 rejects some reasonable forms of visual indentation
+        let g:pymode_lint_ignore.=",E128"
+        " pep8 rejects whitespace before a call's left parenthesis even if it
+        " follows a line continuation
+        let g:pymode_lint_ignore.=",E211"
+        " pyflakes rejects 'from ... import *' even in init modules that are
+        " including some of their children
+        let g:pymode_lint_ignore.=",W404"
+
+        let g:pymode_rope_global_prefix="<Leader>rp"
+        let g:pymode_rope_local_prefix="<Leader>r"
+        let g:pymode_rope_goto_def_newwin="new"
+        let g:pymode_rope_vim_completion=1
+        let g:pymode_rope_extended_complete=1
+    " }
+
+    " sessionman {
+        nunmap <leader>sl
+        nunmap <leader>ss
+
+        nmap <leader>SL :SessionList<CR>
+        nmap <leader>SS :SessionSave<CR>
+    " }
+
+    " Sneak {
+        let g:sneak#streak=1
+
+        nmap f <Plug>SneakForward
+        xmap f <Plug>VSneakForward
+        nmap F <Plug>SneakBackward
+        xmap F <Plug>VSneakBackward
+    " }
+
+    " Surround {
+        let b:surround_indent=1
+    " }
+
+    " Tabmerge {
+        " TODO: mappings
+    " }
+
+    " TagBar {
+        let g:tagbar_autoclose=1
+        let g:tagbar_autopreview=1
+        let g:tagbar_previewwin_pos="botright"
+        let g:tagbar_left=1
+        let g:tagbar_width=31
+        let g:tagbar_zoomwidth=0
+
+        nunmap <leader>tt
+        nnoremap <silent> <leader>T :TagbarToggle<CR>
+    " }
+
+    " YouCompleteMe {
+        let g:ycm_auto_trigger=0
+        let g:ycm_seed_identifiers_with_syntax=1
+        let g:ycm_collect_identifiers_from_tags_files=1
+        let g:ycm_complete_in_comments=1
+    " }
+" }

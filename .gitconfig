@@ -1,0 +1,57 @@
+[user]
+	name = Ivan D Vasin
+	email = nisavid@gmail.com
+[core]
+	autocrlf = input
+	safecrlf = warn
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	askpass = /usr/bin/ksshaskpass
+[branch]
+	autosetuprebase = always
+[diff]
+	tool = kompare
+[merge]
+	tool = kdiff3
+[push]
+	default = simple
+[alias]
+	br = branch
+	cfg = config
+	cfgg = config --global
+	cfgl = config --local
+	ci = commit
+	cia = commit --amend
+	co = checkout
+	df = diff --diff-algorithm=histogram --find-copies --find-renames
+	dfc = diff --diff-algorithm=histogram --find-copies --find-renames --cached
+	dfcs = diff --diff-algorithm=histogram --find-copies --find-renames --cached --stat
+	dfs = diff --diff-algorithm=histogram --find-copies --find-renames --stat
+	lgd = log --patch --diff-algorithm=histogram --find-copies --find-renames
+	lgs = log --stat
+	lgsd = log --stat --patch --diff-algorithm=histogram --find-copies --find-renames
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls = ls-files
+	rmc = rm --cached
+	st = status
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[gui]
+	fontdiff = -family \"courier new\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Grep Python projects
+
+grep --color --line-number --recursive --include='*.py' --exclude-dir='.svn' \
+     --exclude-dir='build' --exclude-dir='dist' "$@"

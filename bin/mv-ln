@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# Move a file to a new location and symlink to it at the old location.
+
+
+DEST=.
+
+ME=`basename $0`
+
+
+function print_error
+{
+    echo "$ME: $1"
+}
+
+function print_error_suggesting_help
+{
+    print_error "$1"
+    echo "Try \`$ME --help\` for more information"
+}
+
+function print_usage
+{
+    cat <<EOF
+Usage: $ME [OPTION]... SOURCE [DEST]
+Move SOURCE to DEST, and create a symlink to it at SOURCE.
+If DEST does not exist, it will be the new name for SOURCE.
+If DEST is a directory, it will be the new location for SOURCE.
+If SOURCE and DEST are both files, then SOURCE will replace DEST only
+with '-f'.
+
+  SOURCE  the file that will be moved
+  DEST    the new location of SOURCE; default is .
+
+Options:
+  -f      remove existing DEST if it and SOURCE are both files
+EOF
+}
+
+
+# parse arguments
+
+first_arg=1
+while [ "$#" -gt 0 ]; do
+    arg=$1
+    if [ $first_arg ]; then
+        case $arg in
+            --help)
+                print_usage
+                exit
+                ;;
+            -f)
+                FORCE=1
+                ;;
+            *)
+                SOURCE=$arg
+                first_arg=
+                second_arg=1
+                ;;
+        esac
+    elif [ $second_arg ]; then
+        DEST=$arg
+        second_arg=
+    else
+        print_usage
+        exit 1
+    fi
+
+    shift
+done
+
+
+function lns_to_source
+{
+    source_sanitized=`echo $SOURCE | sed -r 's_(.*)/$_\1_'`
+    ln -s "$1" "$source_sanitized"
+}
+
+real_dest=`readlink -f $DEST`
+if [ ! -e $DEST ]; then
+    mv $SOURCE $DEST
+    lns_to_source "$real_dest"
+elif [ -d $DEST ]; then
+    mv "$SOURCE" "$DEST"
+    lns_to_source "$real_dest/`basename $SOURCE`"
+elif [[ -f $SOURCE && -f $DEST ]]; then
+    if [ ! $FORCE ]; then
+        print_error_suggesting_help "moving to '$DEST': File exists"
+        exit 1
+    fi
+
+    mv "$SOURCE" "$DEST"
+    lns_to_source "$real_dest"
+else
+    print_usage
+    exit 1
+fi

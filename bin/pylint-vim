@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Invoke pylint and view the results in Vim quickFix.
+
+vim -q <(pylint --output-format parseable --reports no $*)

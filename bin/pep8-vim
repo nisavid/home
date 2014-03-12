@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Invoke pep8 and view the results in Vim quickFix.
+
+vim -q <(pep8 --repeat $*)

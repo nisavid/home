@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Find Python project files
+
+find . \( -name '*.conf' -or -name '*.cfg' -or -name '*.mako' -or -name '*.py' \
+          -or -name '*.sh' -or -name 'Makefile' \) \
+       -and ! \( -wholename '*/.svn/*' -or -wholename '*/build/*' \
+                 -or -wholename '*/dist/*' \) \
+       -and \( "$@" \)

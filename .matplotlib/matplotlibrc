@@ -1,0 +1,2 @@
+backend : Qt4Agg
+backend.qt4 : PySide

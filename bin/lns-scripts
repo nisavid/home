@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Create convenient links to executable scripts.
+
+
+DEST="$HOME/bin"
+
+ME=`basename $0`
+
+
+function print_usage()
+{
+    cat <<EOF
+Usage: $ME [OPTION]... SOURCE [DEST]
+Create links in DEST to each executable script in SOURCE.
+Each link's name will be its script's name without the file extension.
+
+  SOURCE  the directory that contains the scripts
+  DEST    the directory that will contain the links;
+          default is \$HOME/bin
+
+Options:
+  -f      remove existing destination files
+EOF
+}
+
+
+# parse arguments
+first_arg=1
+while [ "$#" -gt 0 ]; do
+    arg="$1"
+    if [ $first_arg ]; then
+        case $arg in
+            --help)
+                print_usage
+                exit
+                ;;
+            -f)
+                FORCE=1
+                ;;
+            *)
+                SOURCE="$arg"
+                first_arg=
+                second_arg=1
+                ;;
+        esac
+    elif [ $second_arg ]; then
+        DEST="$arg"
+        second_arg=
+    else
+        print_usage
+        exit 1
+    fi
+
+    shift
+done
+
+
+if [ ! -d "$DEST" ]; then
+    echo 'error: destination "'$DEST'" is not a directory' >&2
+    exit 1
+fi
+
+
+for file in `ls "$SOURCE"`; do
+    if [ -x "$SOURCE/$file" ]; then
+        newfile=`echo $file | sed -r 's/(.*)\..{1,5}$/\1/'`
+
+        cmd='ln -s'
+        if [ $FORCE ]; then
+            cmd+='f'
+        fi
+
+        real_source=`readlink -f "$SOURCE"`
+        cmd+=" '$real_source/$file' '$DEST/$newfile'"
+
+        echo $cmd | sh
+    fi
+done

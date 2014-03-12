@@ -1,0 +1,9 @@
+[Auto Allow]
+kdewallet=kwalletmanager
+
+[Auto Deny]
+kdewallet=Google Chrome
+
+[Wallet]
+Close When Idle=true
+Idle Timeout=30

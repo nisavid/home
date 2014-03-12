@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Invoke flake8 and view the results in Vim quickFix.
+
+vim -q <(flake8 $*)

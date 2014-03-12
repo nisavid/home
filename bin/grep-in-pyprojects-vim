@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Grep Python projects and view the results in Vim quickFix
+
+vim -q <(grep-in-pyprojects "$@")
