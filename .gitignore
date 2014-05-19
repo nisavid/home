@@ -1,2 +1,2 @@
-.config/ipython/*/db/rootmodules_cache
+.config/ipython/*/db
 .config/ipython/*/history.sqlite
