@@ -9,3 +9,6 @@
 [[ -f "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
     && -n "$(which powerline)" ]] \
  && . "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+
+# Promptline
+[[ -f "$HOME"/.promptline.sh ]] && . "$HOME"/.promptline.sh
