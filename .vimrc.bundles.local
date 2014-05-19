@@ -1,5 +1,7 @@
 
 UnBundle 'spf13/vim-autoclose'
+UnBundle 'gorodinskiy/vim-coloresque'
+UnBundle 'pythoncomplete'
 
 Bundle 'Shougo/unite.vim'
 
@@ -7,8 +9,8 @@ Bundle 'chase/vim-ansible-yaml'
 Bundle 'camelcasemotion'
 Bundle 'Raimondi/delimitMate'
 Bundle 'mru.vim'
-Bundle 'Shougo/neocomplete.vim'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'edkolev/promptline.vim'
 Bundle 'pytest.vim'
 Bundle 'Valloric/python-indent'
 Bundle 'recover.vim'
@@ -19,16 +21,6 @@ Bundle 'BenBergman/vsearch.vim'
 Bundle 'Shougo/neobundle.vim'
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#rc()
-
-UnBundle 'davidhalter/jedi-vim'
-NeoBundle 'davidhalter/jedi-vim', {
-            \ 'build' : {
-            \     'windows' : 'git submodule update --init',
-            \     'cygwin' : 'git submodule update --init',
-            \     'mac' : 'git submodule update --init',
-            \     'unix' : 'git submodule update --init',
-            \     },
-            \ }
 
 UnBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimproc', {

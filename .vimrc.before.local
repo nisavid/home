@@ -1,3 +1,3 @@
-let g:spf13_bundle_groups=['general', 'youcompleteme', 'programming', 'php', 'ruby', 'python', 'go', 'twig', 'javascript', 'haskell', 'html', 'misc', 'scala']
-let g:spf13_use_powerline=0
+let g:spf13_bundle_groups=['general', 'writing', 'youcompleteme', 'programming', 'php', 'ruby', 'python', 'twig', 'javascript', 'haskell', 'html', 'misc', 'scala']
+"let g:spf13_use_powerline=0
 let g:airline_powerline_fonts=1
