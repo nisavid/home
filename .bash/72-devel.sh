@@ -22,6 +22,14 @@ alias maked='make PYENV="$HOME"/pyenv/devel'
 alias makep='make PYENV="$HOME"/pyenv/prod'
 
 
+# environment variables
+export ANSIBLE_HOSTS=/usr/local/bin/ansible-ec2
+export EC2_HOME=/usr/local/ec2
+export JAVA_HOME="$(dirname $(dirname $(readlink -f /etc/alternatives/java)))"
+
+pathmunge "$EC2_HOME/bin" before
+
+
 # Python environment
 PYENV_CANDIDATES=("$HOME"/pyenv/devel "$HOME"/pyenv/prod "$HOME"/pyenv/py3devel
                   "$HOME"/pyenv/py3prod ${PYENV_CANDIDATES[@]})

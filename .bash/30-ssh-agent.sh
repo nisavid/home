@@ -10,7 +10,7 @@
 
 # ensure SSH agent
 
-SSH_ENV="$HOME/.ssh/env"
+export SSH_ENV="$HOME/.ssh/env"
 
 function ssh_add
 {
