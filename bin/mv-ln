@@ -5,7 +5,7 @@
 
 DEST=.
 
-ME=`basename $0`
+ME="$(basename $0)"
 
 
 function print_error
@@ -41,9 +41,10 @@ EOF
 # parse arguments
 
 first_arg=1
-while [ "$#" -gt 0 ]; do
+second_arg=
+while [[ "$#" -gt 0 ]]; do
     arg=$1
-    if [ $first_arg ]; then
+    if [[ -n "$first_arg" ]]; then
         case $arg in
             --help)
                 print_usage
@@ -58,7 +59,7 @@ while [ "$#" -gt 0 ]; do
                 second_arg=1
                 ;;
         esac
-    elif [ $second_arg ]; then
+    elif [[ -n "$second_arg" ]]; then
         DEST=$arg
         second_arg=
     else
@@ -72,19 +73,19 @@ done
 
 function lns_to_source
 {
-    source_sanitized=`echo $SOURCE | sed -r 's_(.*)/$_\1_'`
+    source_sanitized="$(echo $SOURCE | sed -r 's_(.*)/$_\1_')"
     ln -s "$1" "$source_sanitized"
 }
 
-real_dest=`readlink -f $DEST`
-if [ ! -e $DEST ]; then
+real_dest="$(readlink -f $DEST)"
+if [[ ! -e "$DEST" ]]; then
     mv $SOURCE $DEST
     lns_to_source "$real_dest"
-elif [ -d $DEST ]; then
+elif [[ -d "$DEST" ]]; then
     mv "$SOURCE" "$DEST"
     lns_to_source "$real_dest/`basename $SOURCE`"
-elif [[ -f $SOURCE && -f $DEST ]]; then
-    if [ ! $FORCE ]; then
+elif [[ -f "$SOURCE" && -f "$DEST" ]]; then
+    if [[ -z "$FORCE" ]]; then
         print_error_suggesting_help "moving to '$DEST': File exists"
         exit 1
     fi
