@@ -38,7 +38,7 @@ function start_ssh_agent
 
 if [[ -e "$SSH_AUTH_SOCK"
       && -n "$SSH_AGENT_PID"
-      && -n "$(ps -fp "$SSH_AGENT_PID" | grep ssh-agent$)" ]]; then
+      && -n "$(ps -fp "$SSH_AGENT_PID" | grep ssh-agent)" ]]; then
     # SSH agent was initialized elsewhere and was set up in this shell's env
 
     if ! ssh-add -l >& /dev/null; then
@@ -52,7 +52,7 @@ elif [[ -f "$SSH_ENV" ]]; then
     . "$SSH_ENV" > /dev/null
     if ! [[ -e "$SSH_AUTH_SOCK"
             && -n "$SSH_AGENT_PID"
-            && -n "$(ps -fp "$SSH_AGENT_PID" | grep ssh-agent$)" ]]; then
+            && -n "$(ps -fp "$SSH_AGENT_PID" | grep ssh-agent)" ]]; then
         # SSH agent died
 
         start_ssh_agent
