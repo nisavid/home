@@ -32,7 +32,9 @@ function start_ssh_agent
 
     ssh-agent -s | grep -v ^echo > "$SSH_ENV"
     chmod 0600 "$SSH_ENV"
+
     . "$SSH_ENV" > /dev/null
+
     trap 'ssh-agent -k' EXIT
 }
 
