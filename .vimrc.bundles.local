@@ -35,10 +35,11 @@ execute "NeoBundle 'Shougo/vimproc'," . string({
       \    },
       \ })
 
-UnBundle 'Valloric/YouCompleteMe'
-NeoBundle 'Valloric/YouCompleteMe', {
-            \ 'build' : {
-            \     'mac' : './install.sh --clang-completer',
-            \     'unix' : './install.sh --clang-completer',
-            \     },
-            \ }
+" TODO: re-enable once this works on OS X
+"UnBundle 'Valloric/YouCompleteMe'
+"NeoBundle 'Valloric/YouCompleteMe', {
+"            \ 'build' : {
+"            \     'mac' : './install.sh --clang-completer',
+"            \     'unix' : './install.sh --clang-completer',
+"            \     },
+"            \ }

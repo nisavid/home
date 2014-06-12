@@ -3,7 +3,7 @@ let g:spf13_bundle_groups=
          \'misc',
          \'programming',
          \'writing',
-         \'youcompleteme',
+         \'neocomplcache',
          \'haskell',
          \'html',
          \'javascript',
@@ -13,5 +13,7 @@ let g:spf13_bundle_groups=
          \'scala',
          \'twig',
          \]
+         " TODO: re-enable once this works on OS X
+         "\'youcompleteme',
 "let g:spf13_use_powerline=0
 let g:airline_powerline_fonts=1
