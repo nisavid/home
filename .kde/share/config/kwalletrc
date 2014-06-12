@@ -2,7 +2,7 @@
 kdewallet=kwalletmanager
 
 [Auto Deny]
-kdewallet=Google Chrome
+kdewallet=
 
 [Wallet]
 Close When Idle=true
