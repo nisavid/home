@@ -47,8 +47,11 @@ pathmunge /usr/local/sbin before
 pathmunge /usr/local/bin before
 
 # Homebrew
-BREW_PREFIX="$(which brew &>> /dev/null && brew --prefix)"
+BREW_PREFIX="$(which brew &> /dev/null && brew --prefix)"
 if [[ -d "$BREW_PREFIX" ]]; then
+    [[ -f "$HOME"/.brew-github-token ]] \
+     && export HOMEBREW_GITHUB_API_TOKEN="$(cat "$HOME"/.brew-github-token)"
+
     pathmunge "$BREW_PREFIX"/bin before
     pathmunge "$BREW_PREFIX"/opt/coreutils/libexec/gnubin before
     pathmunge "$BREW_PREFIX"/opt/ruby/bin before

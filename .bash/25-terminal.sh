@@ -1,8 +1,8 @@
 # Bash runtime configuration | terminal setup
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
+[[ $- == *i* ]] || return
+# interactive shell -----------------------------------------------------------
 
 
 # shell attributes

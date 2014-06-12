@@ -1,8 +1,8 @@
 # Bash runtime configuration | Ivan D Vasin
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
+[[ $- == *i* ]] || return
+# interactive shell -----------------------------------------------------------
 
 
 # aliases

@@ -1,8 +1,8 @@
 # Bash runtime configuration | customizations of Python commands
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
+[[ $- == *i* ]] || return
+# interactive shell -----------------------------------------------------------
 
 
 # environments

@@ -1,8 +1,8 @@
 # Bash runtime configuration | command prompt | Ivan D Vasin
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
+[[ $- == *i* ]] || return
+# interactive shell -----------------------------------------------------------
 
 
 # Powerline

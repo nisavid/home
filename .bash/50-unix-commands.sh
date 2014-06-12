@@ -1,8 +1,8 @@
 # Bash runtime configuration | customizations of common Unix commands
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
+[[ $- == *i* ]] || return
+# interactive shell -----------------------------------------------------------
 
 
 # colored output

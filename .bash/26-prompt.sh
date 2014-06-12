@@ -1,8 +1,8 @@
 # Bash runtime configuration | command prompt
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
+[[ $- == *i* ]] || return
+# interactive shell -----------------------------------------------------------
 
 
 # identify current chroot
