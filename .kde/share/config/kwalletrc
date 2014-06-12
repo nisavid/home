@@ -1,3 +1,6 @@
+[$Version]
+update_info=kwallet-4.13.upd:kde4.13
+
 [Auto Allow]
 kdewallet=kwalletmanager
 
@@ -7,3 +10,4 @@ kdewallet=
 [Wallet]
 Close When Idle=true
 Idle Timeout=30
+Launch Manager=false
