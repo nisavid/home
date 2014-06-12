@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Upgrade Vim
+
+ok=1
+pushd ~/.vim > /dev/null \
+ && { git pull || unset ok
+      popd > /dev/null
+      [[ -n "$ok" ]] || false
+    } \
+ && vim +BundleInstall! +qa \
+ && vim +BundleClean! +NeoBundleUpdate +qa \
+ && vim '+PromptlineSnapshot! ~/.promptline.sh' +q
