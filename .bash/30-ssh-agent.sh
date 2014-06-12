@@ -1,23 +1,16 @@
 # Bash runtime configuration | SSH agent
 
 
-# ensure interactive shell
-[[ $- != *i* ]] && return
-
-# ensure non-SSH shell
-[[ -n "$SSH_TTY" ]] && return
-
-
-# ensure SSH agent
-
 export SSH_ENV="$HOME/.ssh/env"
 
-function ssh_add
+
+function ssh_agent_add_keys
 {
     ssh-add
 }
 
-function start_ssh_agent
+
+function ssh_agent_start
 {
 
     ssh_dir="$(dirname "$SSH_ENV")"
@@ -34,38 +27,55 @@ function start_ssh_agent
     chmod 0600 "$SSH_ENV"
 
     . "$SSH_ENV" > /dev/null
-
-    trap 'ssh-agent -k' EXIT
 }
+
 
 if [[ -e "$SSH_AUTH_SOCK"
       && -n "$SSH_AGENT_PID"
       && -n "$(ps -fp "$SSH_AGENT_PID" | grep ssh-agent)" ]]; then
     # SSH agent was initialized elsewhere and was set up in this shell's env
 
-    if ! ssh-add -l >& /dev/null; then
-        # SSH agent has no keys
+    if [[ $- == *i* ]]; then
+        # interactive shell
 
-        ssh_add
+        if ! ssh-add -l >& /dev/null; then
+            # SSH agent has no keys
+
+            ssh_agent_add_keys
+        fi
     fi
+
 elif [[ -f "$SSH_ENV" ]]; then
     # SSH agent was initialized by this script (or equivalent)
 
     . "$SSH_ENV" > /dev/null
+
     if ! [[ -e "$SSH_AUTH_SOCK"
             && -n "$SSH_AGENT_PID"
             && -n "$(ps -fp "$SSH_AGENT_PID" | grep ssh-agent)" ]]; then
         # SSH agent died
 
-        start_ssh_agent
-        ssh_add
+        unset SSH_AUTH_SOCK
+        unset SSH_AGENT_PID
+
+        if [[ $- == *i* ]]; then
+            # interactive shell
+
+            ssh_agent_start
+            ssh_agent_add_keys
+        fi
     fi
+
 else
     # SSH agent was not initialized
 
-    start_ssh_agent
-    ssh_add
+    if [[ $- == *i* ]]; then
+        # interactive shell
+
+        ssh_agent_start
+        ssh_agent_add_keys
+    fi
 fi
 
-unset ssh_add
-unset start_ssh_agent
+unset ssh_agent_add_keys
+unset ssh_agent_start
