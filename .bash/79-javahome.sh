@@ -1,10 +1,10 @@
 # Bash runtime configuration | Java home
 
 
-for path in ${JAVA_HOME_CANDIDATES[@]}; do
-    if [[ -d "$path" ]]; then
+for dir in ${JAVA_HOMES[@]}; do
+    if [[ -d "$dir" ]]; then
         export JAVA_HOME="$path"
         break
     fi
 done
-unset path
+unset dir

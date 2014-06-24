@@ -1,9 +1,9 @@
 # Bash runtime configuration | Python environment
 
 
-for pyenv in ${PYENV_CANDIDATES[@]}; do
+for pyenv in ${PYENVS[@]}; do
     if [[ -f "$pyenv"/bin/activate ]]; then
-        . "$pyenv"/bin/activate
+        source "$pyenv"/bin/activate
         break
     fi
 done

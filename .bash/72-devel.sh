@@ -8,8 +8,8 @@ pathmunge "$EC2_HOME/bin" before
 
 
 # Python environment
-PYENV_CANDIDATES=("$HOME"/pyenv/devel "$HOME"/pyenv/prod "$HOME"/pyenv/py3devel
-                  "$HOME"/pyenv/py3prod ${PYENV_CANDIDATES[@]})
+PYENVS=("$HOME"/pyenv/devel "$HOME"/pyenv/prod "$HOME"/pyenv/py3devel
+        "$HOME"/pyenv/py3prod ${PYENVS[@]})
 
 
 [[ $- == *i* ]] || return

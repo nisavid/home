@@ -2,37 +2,38 @@
 
 function libpathmunge
 {
-    case ":$LD_LIBRARY_PATH:" in
-        *:"$1":*)
-            ;;
-        "$1":*)
-            ;;
-        *:"$1")
-            ;;
-        *)
-            if [[ "$2" == 'after' ]]; then
-                export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$1"
-            else
-                export LD_LIBRARY_PATH="$1:$LD_LIBRARY_PATH"
-            fi
+    [[ ! -d "$1" ]] && return
+
+    LD_LIBRARY_PATH="$(echo ${LD_LIBRARY_PATH#$1:} | sed "s|:$1||g")"
+
+    case "$2" in
+      'after')
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$1"
+        ;;
+      'before')
+        LD_LIBRARY_PATH="$1:$LD_LIBRARY_PATH"
+        ;;
     esac
+
+    export LD_LIBRARY_PATH
 }
 
 function pathmunge
 {
     [[ ! -d "$1" ]] && return
 
-    export PATH="${PATH#$1:}"
-    export PATH="$(echo $PATH | sed "s|:$1||g")"
+    PATH="$(echo ${PATH#$1:} | sed "s|:$1||g")"
 
     case "$2" in
-        'after')
-            export PATH="$PATH:$1"
-            ;;
-        'before')
-            export PATH="$1:$PATH"
-            ;;
+      'after')
+        PATH="$PATH:$1"
+        ;;
+      'before')
+        PATH="$1:$PATH"
+        ;;
     esac
+
+    export PATH
 }
 
 

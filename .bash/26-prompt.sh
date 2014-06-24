@@ -19,7 +19,7 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 else
     color_prompt=
 fi
-if [[ "$color_prompt" ]]; then
+if [[ -n "$color_prompt" ]]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h \w \$ '
@@ -28,9 +28,9 @@ unset color_prompt
 
 # if this is an xterm, set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+  xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
+  *)
     ;;
 esac

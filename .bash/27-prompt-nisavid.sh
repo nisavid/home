@@ -7,7 +7,7 @@
 
 # Powerline
 [[ -f "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
-    && -n "$(which powerline)" ]] \
+   && -n "$(which powerline)" ]] \
  && . "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
 
 # Promptline
