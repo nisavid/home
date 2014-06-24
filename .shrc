@@ -1,0 +1,63 @@
+# Shell runtime configuration
+
+
+# Local config ----------------------------------------------------------------
+
+
+PRE_SHRCS=()
+SHRC_DIRS=("$HOME"/.sh)
+shell="$(ps --no-headers --format comm $$)"
+case "$shell" in
+  bash)
+    PRE_SHRCS=(/etc/bashrc /etc/bash.bashrc /etc/bash/bashrc)
+    SHRC_DIRS+=("$HOME"/.bash)
+    ;;
+  csh)
+    SHRC_DIRS+=("$HOME"/.csh)
+    ;;
+  fish)
+    SHRC_DIRS+=("$HOME"/.fish)
+    ;;
+  tcsh)
+    SHRC_DIRS+=("$HOME"/.csh "$HOME"/.tcsh)
+    ;;
+  zsh)
+    SHRC_DIRS+=("$HOME"/.zsh)
+    ;;
+esac
+
+
+GNU_CMD_DIRS=(
+    "$(which brew > /dev/null 2> /dev/null \
+        && brew --prefix)"/opt/coreutils/libexec/gnubin
+    /opt/local/libexec/gnubin
+    )
+
+
+# External settings -----------------------------------------------------------
+
+
+# use GNU commands on non-GNU systems
+for dir in ${GNU_CMD_DIRS[@]}; do
+    if [[ -d "$dir" ]]; then
+        PATH="$dir:$PATH"
+        break
+    fi
+done
+unset dir
+unset GNU_CMD_DIRS
+
+for rc in ${PRE_SHRCS[@]}; do
+    [[ -f "$rc" ]] && source "$rc"
+done
+unset rc
+
+for dir in ${SHRC_DIRS[@]}; do
+    if [[ -d "$dir" ]]; then
+        for file in $(ls "$dir"/* | sort); do
+            source "$file"
+        done
+    fi
+done
+unset file
+unset dir
