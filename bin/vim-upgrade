@@ -10,4 +10,4 @@ pushd ~/.vim > /dev/null \
     } \
  && vim +BundleInstall! +qa \
  && vim +BundleClean! +NeoBundleUpdate +qa \
- && vim '+PromptlineSnapshot! ~/.promptline.sh' +q
+ && vim '+PromptlineSnapshot! ~/.promptline.sh airline' +q

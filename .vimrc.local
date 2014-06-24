@@ -107,6 +107,23 @@
         let g:PreviewBrowsers="google-chrome,chromium-browser,firefox,opera,epiphany,safari"
     " }
 
+    " Promptline {
+        let g:promptline_preset=
+              \ {'a': [promptline#slices#host(), promptline#slices#user()],
+              \  'b': [promptline#slices#python_virtualenv()],
+              \  'c': [promptline#slices#cwd()],
+              \  'x': [promptline#slices#jobs()],
+              \  'y': [promptline#slices#git_status()],
+              \  'z': [promptline#slices#vcs_branch()],
+              \  'warn': [promptline#slices#last_exit_code(),
+              \           promptline#slices#battery()],
+              \ 'options': {'left_sections': ['a', 'b', 'c'],
+              \             'right_sections': ['warn', 'x', 'y', 'z'],
+              \             'left_only_sections': ['a', 'b', 'c', 'z', 'y', 'x', 'warn']}
+              \  }
+        let g:promptline_theme='airline_insert'
+    " }
+
     " PyMode {
         let g:pymode_options=0
 
