@@ -117,9 +117,9 @@
               \  'z': [promptline#slices#vcs_branch()],
               \  'warn': [promptline#slices#last_exit_code(),
               \           promptline#slices#battery()],
-              \ 'options': {'left_sections': ['a', 'b', 'c'],
-              \             'right_sections': ['warn', 'x', 'y', 'z'],
-              \             'left_only_sections': ['a', 'b', 'c', 'z', 'y', 'x', 'warn']}
+              \  'options': {'left_sections': ['a', 'b', 'c'],
+              \              'right_sections': ['warn', 'x', 'y', 'z'],
+              \              'left_only_sections': ['a', 'b', 'c', 'z', 'y', 'x', 'warn']}
               \  }
         let g:promptline_theme='airline_insert'
     " }
