@@ -142,6 +142,7 @@
         " including some of their children
         let g:pymode_lint_ignore.=",W404"
 
+        let g:pymode_rope=1
         let g:pymode_rope_global_prefix="<Leader>rp"
         let g:pymode_rope_local_prefix="<Leader>r"
         let g:pymode_rope_goto_def_newwin="new"
