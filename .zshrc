@@ -48,7 +48,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(catimg colored-man colorize command-not-found compleat dirhistory safe-paste screen adb autopep8 brew common-aliases cp encode64 git git-extras git-flow git-hubflow git-remote-branch gitignore history jsontools iwhois mercurial npm pep8 pip postgres pylint python redis-cli systemadmin systemd torrent urltools vi-mode vim-interaction wd web-search zsh-syntax-highlighting history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
