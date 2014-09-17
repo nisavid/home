@@ -22,18 +22,15 @@ Bundle 'Shougo/neobundle.vim'
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#rc()
 
-UnBundle 'Shougo/vimproc'
-let vimproc_updcmd =
-    \ has('win64') ?
-      \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
-execute "NeoBundle 'Shougo/vimproc'," . string({
-      \ 'build' : {
-      \     'windows' : vimproc_updcmd,
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ })
+UnBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+            \ 'build' : {
+            \     'windows' : 'tools\\update-dll-mingw',
+            \     'cygwin' : 'make -f make_cygwin.mak',
+            \     'mac' : 'make -f make_mac.mak',
+            \     'unix' : 'make -f make_unix.mak',
+            \    },
+            \ }
 
 " TODO: re-enable once this works on OS X
 "UnBundle 'Valloric/YouCompleteMe'
