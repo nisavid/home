@@ -1,4 +1,4 @@
-# Bash runtime configuration | customizations of common Unix commands
+# Shell runtime configuration | customizations of common Unix commands
 
 
 [[ $- == *i* ]] || return

@@ -1,4 +1,4 @@
-# Bash runtime configuration
+# Shell runtime configuration
 # | customizations of common Unix commands
 # | Ivan D Vasin
 

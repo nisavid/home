@@ -1,4 +1,4 @@
-# Bash runtime configuration | development
+# Shell runtime configuration | development
 
 
 # environment variables

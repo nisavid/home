@@ -1,4 +1,4 @@
-# Bash runtime configuration | SSH agent
+# Shell runtime configuration | SSH agent
 
 
 export SSH_ENV="$HOME/.ssh/env"

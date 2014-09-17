@@ -1,4 +1,4 @@
-# Bash runtime configuration | customizations of Python commands
+# Shell runtime configuration | customizations of Python commands
 
 
 [[ $- == *i* ]] || return

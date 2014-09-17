@@ -1,4 +1,4 @@
-# Bash runtime configuration | Python environment
+# Shell runtime configuration | Python environment
 
 
 declare -a PYENVS

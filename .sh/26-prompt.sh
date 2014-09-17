@@ -1,4 +1,4 @@
-# Bash runtime configuration | command prompt
+# Shell runtime configuration | command prompt
 
 
 [[ $- == *i* ]] || return

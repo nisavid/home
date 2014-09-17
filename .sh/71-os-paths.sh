@@ -1,4 +1,4 @@
-# Bash runtime configuration | operating system paths
+# Shell runtime configuration | operating system paths
 
 
 # Java home

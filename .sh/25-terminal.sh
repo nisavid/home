@@ -1,4 +1,4 @@
-# Bash runtime configuration | terminal setup
+# Shell runtime configuration | terminal setup
 
 
 [[ $- == *i* ]] || return

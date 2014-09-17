@@ -1,4 +1,4 @@
-# Bash runtime configuration | environment variables
+# Shell runtime configuration | environment variables
 
 function libpathmunge
 {

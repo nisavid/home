@@ -1,4 +1,4 @@
-# Bash runtime configuration | Ivan D Vasin
+# Shell runtime configuration | Ivan D Vasin
 
 
 [[ $- == *i* ]] || return
