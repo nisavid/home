@@ -19,8 +19,11 @@ Bundle 'Tabmerge'
 Bundle 'BenBergman/vsearch.vim'
 
 Bundle 'Shougo/neobundle.vim'
-set runtimepath+=~/.vim/bundle/neobundle.vim
-call neobundle#rc()
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+
+call neobundle#begin()
 
 UnBundle 'Shougo/vimproc.vim'
 NeoBundle 'Shougo/vimproc.vim', {
@@ -43,3 +46,5 @@ NeoBundle 'Valloric/YouCompleteMe', {
             \     'unix' : './install.sh --clang-completer',
             \     },
             \ }
+
+call neobundle#end()
