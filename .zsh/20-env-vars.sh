@@ -5,4 +5,6 @@
 # interactive shell -----------------------------------------------------------
 
 
-export ZLE_RPROMPT_INDENT=0
+# FIXME: this causes buggy behavior in the space character after the left
+#   prompt.  fix that, and reactivate this
+#export ZLE_RPROMPT_INDENT=0
