@@ -1,4 +1,7 @@
 
+Bundle 'maxbrunsfeld/vim-yankstack'
+call yankstack#setup()
+
 UnBundle 'spf13/vim-autoclose'
 UnBundle 'gorodinskiy/vim-coloresque'
 UnBundle 'pythoncomplete'
