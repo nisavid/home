@@ -30,8 +30,8 @@
 " Formatting {
     set wrap
 
-    autocmd FileType gitcommit setlocal textwidth=72
-    autocmd FileType python,rst,sh setlocal textwidth=79
+    autocmd FileType gitcommit,rst setlocal textwidth=72
+    autocmd FileType python,sh setlocal textwidth=79
     set colorcolumn=+1
 
     " defined in ~/.vimrc
