@@ -1,3 +1,14 @@
+" Helpers {
+    function RunWith(command)
+        let outfile=tempname()
+        let time_outfile=tempname()
+        silent execute "!{ time " . a:command . " " . expand("%") . " &> '" . outfile . "'; } 2> '" . time_outfile . "'"
+        execute "!clear; cat '" . outfile . "'; echo -e '\\n\\n'; cat '" . time_outfile . "'"
+        call delete(outfile)
+        call delete(time_outfile)
+    endfunction
+" }
+
 " Environment {
     set shell=$SHELL
     set term=xterm-256color
@@ -52,6 +63,9 @@
     imap OB <C-o>j
     imap OC <C-o>l
     imap OD <C-o>h
+
+    autocmd FileType python nmap <leader>R :call RunWith("python")<CR>
+    autocmd FileType ruby nmap <leader>R :call RunWith("ruby")<CR>
 " }
 
 " Plugins {
