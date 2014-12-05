@@ -1,4 +1,5 @@
 " Environment {
+    set shell=$SHELL
     set term=xterm-256color
 " }
 
