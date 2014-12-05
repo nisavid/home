@@ -22,6 +22,9 @@ PYENVS=("$HOME"/pyenv/devel "$HOME"/pyenv/prod "$HOME"/pyenv/py3devel
 
 # aliases
 
+# Python
+alias ipy='ipython'
+
 # Python environment
 alias ad='. "$HOME"/pyenv/devel/bin/activate'
 alias ad3='. "$HOME"/pyenv/py3devel/bin/activate'

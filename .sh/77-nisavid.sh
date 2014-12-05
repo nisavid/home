@@ -7,9 +7,6 @@
 
 # aliases
 
-# Python
-alias ipy='ipython'
-
 # Vim sessions
 alias vbf="vim '+SessionOpen bedframe'"
 alias vbfa="vim '+SessionOpen bedframe-auth'"
