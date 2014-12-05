@@ -5,6 +5,10 @@
 export ANSIBLE_HOSTS='/usr/local/bin/ansible-ec2'
 export EC2_HOME='/usr/local/ec2'
 pathmunge "$EC2_HOME/bin" before
+export RI='--format ansi'
+export RIPDIR='/home/nisavid/.rip'
+export RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
+pathmunge "$RIPDIR/active/bin" after
 
 
 # Python environment
