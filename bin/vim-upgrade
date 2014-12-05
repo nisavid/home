@@ -8,6 +8,6 @@ pushd ~/.vim > /dev/null \
       popd > /dev/null
       [[ -n "$ok" ]] || false
     } \
- && vim +BundleInstall! +qa \
+ && vim +BundleInstall! \
  && vim +BundleClean! +NeoBundleUpdate +qa \
  && vim '+PromptlineSnapshot! ~/.promptline.sh airline' +q
