@@ -150,6 +150,12 @@
         let g:pymode_rope_extended_complete=1
     " }
 
+    " ri {
+        nnoremap  <leader>ri :call ri#OpenSearchPrompt(0)<CR>
+        nnoremap  <leader>rI :call ri#OpenSearchPrompt(1)<CR>
+        nnoremap  <leader>rK :call ri#LookupNameUnderCursor()<CR>
+    " }
+
     " sessionman {
         nunmap <leader>sl
         nunmap <leader>ss
