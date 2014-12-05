@@ -31,13 +31,13 @@
     set wrap
 
     autocmd FileType gitcommit,rst setlocal textwidth=72
-    autocmd FileType python,sh setlocal textwidth=79
+    autocmd FileType python,ruby,sh setlocal textwidth=79
     set colorcolumn=+1
 
     " defined in ~/.vimrc
     autocmd FileType rst autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
-    autocmd FileType python,rst,sh setlocal formatoptions-=t
+    autocmd FileType python,rst,ruby,sh setlocal formatoptions-=t
 
     set tildeop
 " }
