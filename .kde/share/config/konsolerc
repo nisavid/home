@@ -12,12 +12,16 @@ ShowWindowTitleOnTitleBar=true
 
 [MainWindow]
 Height 1080=1081
+Height 1440=1441
 Height 1800=1801
+Height 2160=2161
 MenuBar=Enabled
-State=AAAA/wAAAAD9AAAAAAAABVsAAAbdAAAABAAAAAQAAAAIAAAACPwAAAAA
+State=AAAA/wAAAAD9AAAAAAAABVsAAAhFAAAABAAAAAQAAAAIAAAACPwAAAAA
 ToolBarsMovable=Disabled
 Width 1920=1371
+Width 2560=1371
 Width 2880=1371
+Width 3840=1371
 
 [TabBar]
 NewTabBehavior=PutNewTabAfterCurrentTab
