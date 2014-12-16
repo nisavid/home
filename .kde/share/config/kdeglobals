@@ -134,7 +134,7 @@ Size=64
 
 [DirSelect Dialog]
 DirSelectDialog Size=872,606
-History Items[$e]=file://$HOME/inbox[bt],file://$HOME/public
+History Items[$e]=
 
 [General]
 ColorScheme=Solarized Dark
