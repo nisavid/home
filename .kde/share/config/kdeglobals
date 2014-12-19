@@ -184,7 +184,7 @@ Sort directories first=true
 Sort reversed=false
 Speedbar Width=320
 View Style=Simple
-listViewIconSize=0
+listViewIconSize=15
 
 [KShortcutsDialog Settings]
 Dialog Size=1342,1119
@@ -286,7 +286,7 @@ DisabledColor2=0,0,0
 DisabledEffect=togray
 DisabledSemiTransparent=true
 DisabledValue=1
-Size=32
+Size=48
 
 [WM]
 activeBackground=7,54,66
