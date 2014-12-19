@@ -146,7 +146,7 @@ fixed=Inconsolata LGC for Powerline,6.5,-1,5,63,0,0,0,0,0
 font=Roboto Slab,7,-1,5,50,0,0,0,0,0
 menuFont=Roboto,7.5,-1,5,50,0,0,0,0,0
 shadeSortColumn=true
-smallestReadableFont=Roboto Slab,5.5,-1,5,50,0,0,0,0,0
+smallestReadableFont=Roboto Slab,6,-1,5,50,0,0,0,0,0
 taskbarFont=Roboto,7.5,-1,5,50,0,0,0,0,0
 toolBarFont=Roboto,6.5,-1,5,50,0,0,0,0,0
 widgetStyle=oxygen
@@ -182,7 +182,7 @@ Show hidden files=false
 Sort by=Name
 Sort directories first=true
 Sort reversed=false
-Speedbar Width=304
+Speedbar Width=320
 View Style=Simple
 listViewIconSize=0
 
