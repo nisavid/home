@@ -6,7 +6,7 @@
 
 PRE_SHRCS=()
 SHRC_DIRS=("$HOME"/.sh)
-shell="$(ps --no-headers --format comm $$)"
+shell="$(ps -o comm $$ | tail -n +2)"
 case "$shell" in
   bash)
     PRE_SHRCS=(/etc/bashrc /etc/bash.bashrc /etc/bash/bashrc)

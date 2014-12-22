@@ -22,7 +22,7 @@ function ssh_agent_start
         fi
     fi
 
-    ssh-agent -s | /bin/grep -v '^echo' > "$SSH_ENV"
+    ssh-agent -s | "$GREP" -v '^echo' > "$SSH_ENV"
     chmod 0600 "$SSH_ENV"
 
     . "$SSH_ENV" > /dev/null
@@ -31,7 +31,7 @@ function ssh_agent_start
 
 if [[ -e "$SSH_AUTH_SOCK"
       && -n "$SSH_AGENT_PID"
-      && -n "$(ps -fp "$SSH_AGENT_PID" | /bin/grep ssh-agent)" ]]; then
+      && -n "$(ps -fp "$SSH_AGENT_PID" | "$GREP" ssh-agent)" ]]; then
     # SSH agent was initialized elsewhere and was set up in this shell's env
 
     if [[ $- == *i* ]]; then
@@ -51,7 +51,7 @@ elif [[ -f "$SSH_ENV" ]]; then
 
     if ! [[ -e "$SSH_AUTH_SOCK"
             && -n "$SSH_AGENT_PID"
-            && -n "$(ps -fp "$SSH_AGENT_PID" | /bin/grep ssh-agent)" ]]; then
+            && -n "$(ps -fp "$SSH_AGENT_PID" | "$GREP" ssh-agent)" ]]; then
         # SSH agent died
 
         unset SSH_AUTH_SOCK

@@ -55,6 +55,7 @@ if [[ -d "$BREW_PREFIX" ]]; then
 
     pathmunge "$BREW_PREFIX"/bin before
     pathmunge "$BREW_PREFIX"/opt/coreutils/libexec/gnubin before
+    pathmunge "$BREW_PREFIX"/opt/gnu-sed/libexec/gnubin before
     pathmunge "$BREW_PREFIX"/opt/ruby/bin before
 
     [[ -f "$BREW_PREFIX"/opt/curl-ca-bundle/share/ca-bundle.crt ]] \
