@@ -12,7 +12,6 @@ function ssh_agent_add_keys
 
 function ssh_agent_start
 {
-
     ssh_dir="$(dirname "$SSH_ENV")"
     if [[ ! -d "$ssh_dir" ]]; then
         if [[ ! -e "$ssh_dir" ]]; then
