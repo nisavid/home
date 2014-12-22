@@ -1,4 +1,4 @@
-# Bash runtime configuration | Java home
+# Shell runtime configuration | Java home
 
 
 for dir in ${JAVA_HOMES[@]}; do

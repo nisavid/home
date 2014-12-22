@@ -1,4 +1,4 @@
-# Bash runtime configuration | database interaction
+# Shell runtime configuration | database interaction
 
 alias mysql="expect <(echo 'spawn -noecho mysql {*}\$argv
                             set timeout 12
