@@ -43,9 +43,9 @@ EOF
 first_arg=1
 second_arg=
 while [[ "$#" -gt 0 ]]; do
-    arg=$1
+    arg="$1"
     if [[ -n "$first_arg" ]]; then
-        case $arg in
+        case "$arg" in
             --help)
                 print_usage
                 exit
@@ -54,13 +54,13 @@ while [[ "$#" -gt 0 ]]; do
                 FORCE=1
                 ;;
             *)
-                SOURCE=$arg
+                SOURCE="$arg"
                 first_arg=
                 second_arg=1
                 ;;
         esac
     elif [[ -n "$second_arg" ]]; then
-        DEST=$arg
+        DEST="$arg"
         second_arg=
     else
         print_usage
@@ -77,13 +77,13 @@ function lns_to_source
     ln -s "$1" "$source_sanitized"
 }
 
-real_dest="$(readlink -f $DEST)"
+real_dest="$(readlink -f "$DEST")"
 if [[ ! -e "$DEST" ]]; then
-    mv $SOURCE $DEST
+    mv "$SOURCE" "$DEST"
     lns_to_source "$real_dest"
 elif [[ -d "$DEST" ]]; then
     mv "$SOURCE" "$DEST"
-    lns_to_source "$real_dest/`basename $SOURCE`"
+    lns_to_source "$real_dest/$(basename "$SOURCE")"
 elif [[ -f "$SOURCE" && -f "$DEST" ]]; then
     if [[ -z "$FORCE" ]]; then
         print_error_suggesting_help "moving to '$DEST': File exists"
