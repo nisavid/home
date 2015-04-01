@@ -1,0 +1,14 @@
+[$Version]
+update_info=kubuntu-update-kickoff2.upd:kubuntu-update-kickoff
+
+[Favorites]
+FavoriteURLs=/usr/share/applications/kde4/konsole.desktop,/usr/share/applications/kde4/dolphin.desktop,/usr/share/applications/firefox.desktop,/usr/share/applications/google-chrome.desktop,/usr/share/applications/vivaldi.desktop,/home/nisavid/.local/share/applications/chrome-knipolnnllmklapflnccelgolnpehhpl-Default.desktop,/usr/share/applications/kde4/Kontact.desktop,/usr/share/applications/kde4/ktorrent.desktop,/usr/share/applications/kde4/krdc.desktop,/usr/share/applications/wireshark.desktop,/home/nisavid/.local/share/applications/Web2Executable.desktop,/usr/share/applications/kde4/kwrite.desktop,/usr/share/applications/gvim.desktop,/usr/share/applications/libreoffice-writer.desktop,/usr/share/applications/kde4/kcalc.desktop,/usr/share/applications/kde4/KCharSelect.desktop,/usr/share/applications/kde4/kleopatra.desktop,/usr/share/applications/kde4/systemsettings.desktop,/usr/share/applications/kde4/muon-discover.desktop,/usr/share/applications/kde4/muon-updater.desktop
+
+[KRunner]
+loadAll=false
+
+[KRunner][PlasmaRunnerManager]
+pluginWhiteList=places,shell,services,bookmarks,recentdocuments,locations
+
+[RecentlyUsed]
+Applications=
