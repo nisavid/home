@@ -22,7 +22,7 @@ function pathmunge
 {
     [[ ! -d "$1" ]] && return
 
-    PATH="$(echo ${PATH#$1:} | sed "s|:$1||g")"
+    PATH="$(echo :$PATH | sed "s|:$1||g" | tail -c +2)"
 
     case "$2" in
       'after')
