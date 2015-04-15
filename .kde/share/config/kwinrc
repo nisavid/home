@@ -12,7 +12,7 @@ GLPreferBufferSwap=a
 GLTextureFilter=2
 GraphicsSystem=raster
 HiddenPreviews=5
-OpenGLIsUnsafe=true
+OpenGLIsUnsafe=false
 UnredirectFullscreen=false
 XRenderSmoothScale=false
 
