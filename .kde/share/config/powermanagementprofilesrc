@@ -5,10 +5,10 @@ icon=battery-charging
 value=100
 
 [AC][DPMSControl]
-idleTime[$d]
+idleTime=1800
 
 [AC][DimDisplay]
-idleTime=300000
+idleTime=600000
 
 [AC][HandleButtonEvents]
 lidAction=1
@@ -30,17 +30,17 @@ icon=battery-060
 value=60
 
 [Battery][DPMSControl]
-idleTime=300
+idleTime=900
 
 [Battery][DimDisplay]
-idleTime=120000
+idleTime=300000
 
 [Battery][HandleButtonEvents]
 lidAction=1
 powerButtonAction=16
 
 [Battery][SuspendSession]
-idleTime=600000
+idleTime=1800000
 suspendType=1
 
 [LowBattery]
