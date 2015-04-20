@@ -21,7 +21,7 @@ case "$shell" in
   tcsh)
     SHRC_DIRS+=("$HOME"/.csh "$HOME"/.tcsh)
     ;;
-  zsh)
+  zsh|-zsh)
     SHRC_DIRS+=("$HOME"/.zsh)
     ;;
 esac
