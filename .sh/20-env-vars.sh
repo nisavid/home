@@ -114,5 +114,5 @@ path_affix pre "$HOME"/bin
 
 # Preferred applications ------------------------------------------------------
 
-export EDITOR=/usr/bin/vim
-export SVN_EDITOR=/usr/bin/vim
+export EDITOR="$(which vim)"
+export SVN_EDITOR="$EDITOR"
