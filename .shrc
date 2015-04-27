@@ -6,23 +6,28 @@
 
 PRE_SHRCS=()
 SHRC_DIRS=("$HOME"/.sh)
-shell="$(ps -o comm $$ | tail -n +2)"
-case "$shell" in
+export SHELL_CMD="$(ps -o comm $$ | tail -n +2)"
+case "$SHELL_CMD" in
   bash)
     PRE_SHRCS=(/etc/bashrc /etc/bash.bashrc /etc/bash/bashrc)
     SHRC_DIRS+=("$HOME"/.bash)
+    export SHELL_NAME='Bash'
     ;;
   csh)
     SHRC_DIRS+=("$HOME"/.csh)
+    export SHELL_NAME='csh'
     ;;
   fish)
     SHRC_DIRS+=("$HOME"/.fish)
+    export SHELL_NAME='fish'
     ;;
   tcsh)
     SHRC_DIRS+=("$HOME"/.csh "$HOME"/.tcsh)
+    export SHELL_NAME='tcsh'
     ;;
   zsh|-zsh)
     SHRC_DIRS+=("$HOME"/.zsh)
+    export SHELL_NAME='Zsh'
     ;;
 esac
 
