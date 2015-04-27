@@ -1,19 +1,7 @@
 # Shell runtime configuration | environment variables
 
-function libpathmunge
-{
-    [[ ! -d "$1" ]] && return
+# helpers ---------------------------------------------------------------------
 
-    LD_LIBRARY_PATH="$(echo ${LD_LIBRARY_PATH#$1:} | sed "s|:$1||g")"
-
-    case "$2" in
-      'after')
-        LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$1"
-        ;;
-      'before')
-        LD_LIBRARY_PATH="$1:$LD_LIBRARY_PATH"
-        ;;
-    esac
 
     export LD_LIBRARY_PATH
 }
@@ -37,7 +25,7 @@ function pathmunge
 }
 
 
-# shell
+# shell -----------------------------------------------------------------------
 
 export HISTCONTROL=ignoredups
 export HISTSIZE=1000000
