@@ -109,6 +109,8 @@ if [[ -d /opt/local ]]; then
     path_affix pre /opt/local/libexec/gnubin
 fi
 
+path_affix post "$HOME"/Library/Android/sdk/platform-tools
+
 path_affix pre "$HOME"/bin
 
 
