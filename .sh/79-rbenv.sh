@@ -1,7 +1,7 @@
 # Shell runtime configuration | Ruby environment
 
 
-pathmunge "$HOME/.rvm/bin" after
+path_affix post "$HOME/.rvm/bin"
 
 
 [[ $- == *i* ]] || return
