@@ -1,6 +1,6 @@
 # Shell runtime configuration | environment variables
 
-# helpers ---------------------------------------------------------------------
+# Helpers ---------------------------------------------------------------------
 
 function dylib_path_affix
 {
@@ -72,11 +72,14 @@ function _path_affix_to_var
 }
 
 
-# shell -----------------------------------------------------------------------
+# Shell -----------------------------------------------------------------------
 
 export HISTCONTROL=ignoredups
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
+
+
+# Paths -----------------------------------------------------------------------
 
 lib_path_affix pre /usr/local/lib
 path_affix pre /usr/local/sbin
@@ -86,7 +89,7 @@ path_affix pre /usr/local/bin
 BREW_PREFIX="$(which brew &> /dev/null && brew --prefix)"
 if [[ -d "$BREW_PREFIX" ]]; then
     [[ -f "$HOME"/.brew-github-token ]] \
-     && export HOMEBREW_GITHUB_API_TOKEN="$(cat "$HOME"/.brew-github-token)"
+      && export HOMEBREW_GITHUB_API_TOKEN="$(cat "$HOME"/.brew-github-token)"
 
     path_affix pre "$BREW_PREFIX"/bin
     path_affix pre "$BREW_PREFIX"/opt/coreutils/libexec/gnubin
@@ -94,7 +97,7 @@ if [[ -d "$BREW_PREFIX" ]]; then
     path_affix pre "$BREW_PREFIX"/opt/ruby/bin
 
     [[ -f "$BREW_PREFIX"/opt/curl-ca-bundle/share/ca-bundle.crt ]] \
-     && export SSL_CERT_FILE="$BREW_PREFIX"/opt/curl-ca-bundle/share/ca-bundle.crt
+      && export SSL_CERT_FILE="$BREW_PREFIX"/opt/curl-ca-bundle/share/ca-bundle.crt
 fi
 
 # MacPorts
@@ -108,6 +111,8 @@ fi
 
 path_affix pre "$HOME"/bin
 
-# preferred applications
+
+# Preferred applications ------------------------------------------------------
+
 export EDITOR=/usr/bin/vim
 export SVN_EDITOR=/usr/bin/vim
