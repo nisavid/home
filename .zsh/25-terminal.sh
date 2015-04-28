@@ -21,3 +21,7 @@ bindkey "^[[D" vi-backward-char
 bindkey "^[[F" vi-end-of-line
 # Home -> Move the cursor to the beginning of the line
 bindkey "^[[H" vi-beginning-of-line
+# Backspace -> Delete the previous character
+bindkey "^?" backward-delete-char
+# Delete -> Delete the current character
+bindkey "^[[3~" delete-char
