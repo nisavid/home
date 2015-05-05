@@ -26,7 +26,7 @@ else
     alias diff='diff --unified'
 fi
 alias l='ls --format=vertical --classify'
-alias la='ls --almost-all'
-alias lal='ls --all --format=verbose --classify'
-alias ll='ls --format=verbose --classify'
-alias lr='ls --recursive'
+alias la='l --almost-all'
+alias lal='l --all --format=verbose'
+alias ll='l --format=verbose'
+alias lr='l --recursive'
