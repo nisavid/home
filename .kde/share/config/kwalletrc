@@ -9,5 +9,6 @@ kdewallet=
 
 [Wallet]
 Close When Idle=true
+First Use=false
 Idle Timeout=30
 Launch Manager=false
