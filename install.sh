@@ -222,8 +222,10 @@ if [ -n "$(printf "$modules" | grep ^oh-my-zsh$)" ]; then
         if [ -e "$HOME"/.oh-my-zsh ]; then
             fail=true
         else
-            sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
-              || fail=true
+            # XXX:
+            #   ignore exit status because (as of 2015-09-13) it is always
+            #   nonzero on Linux
+            sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         fi
     fi
     [ "$fail" ] && [ ! "$keep_going" ] && exit 1
