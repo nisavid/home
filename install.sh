@@ -133,7 +133,7 @@ parse_args() {
                     force=true
                     ;;
                   --keep-going | -k)
-                    force=true
+                    keep_going=true
                     ;;
                   --help)
                     echo "$usage"
@@ -166,7 +166,7 @@ parse_args $@
 
 link='ln -s'
 if [ "$force" ]; then
-    link="$linkf"
+    link="${link}f"
 fi
 
 printf 'installing modules:' >&2
