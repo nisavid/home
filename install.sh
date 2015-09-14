@@ -211,17 +211,6 @@ if [ -n "$(printf "$modules" | grep ^bash$)" ]; then
     [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
-if [ -n "$(printf "$modules" | grep ^zsh$)" ]; then
-    echo 'linking Zsh files' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.zshrc "$HOME"/.zshrc || fail=true
-        mkdir -p "$HOME"/.zsh || fail=true
-        $link "$src_root"/.zsh/* "$HOME"/.zsh/ || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
 if [ -n "$(printf "$modules" | grep ^oh-my-zsh$)" ]; then
     echo 'installing Oh-My-Zsh' >&2
     unset fail
@@ -245,6 +234,17 @@ if [ -n "$(printf "$modules" | grep ^oh-my-zsh-custom$)" ]; then
     unset fail
     if [ ! "$dry_run" ]; then
         "$src_root"/.oh-my-zsh/custom/plugins/install.sh || fail=true
+    fi
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
+fi
+
+if [ -n "$(printf "$modules" | grep ^zsh$)" ]; then
+    echo 'linking Zsh files' >&2
+    unset fail
+    if [ ! "$dry_run" ]; then
+        $link "$src_root"/.zshrc "$HOME"/.zshrc || fail=true
+        mkdir -p "$HOME"/.zsh || fail=true
+        $link "$src_root"/.zsh/* "$HOME"/.zsh/ || fail=true
     fi
     [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
