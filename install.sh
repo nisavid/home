@@ -106,25 +106,25 @@ parse_args() {
         module_off="$(printf -- $arg_str | sed -n 's/^--no-\(.*\)$/\1/p')"
         if [ -n "$module_off" ] \
            && [ -n "$(printf "$all_modules" | grep ^"$module_off"$)" ]; then
-            modules_off+="\n$module_off"
+            modules_off="$modules_off\n$module_off"
         else
             module_on="$(printf -- $arg_str | sed -n 's/^--\(.*\)$/\1/p')"
             if [ -n "$module_on" ] \
                && [ -n "$(printf "$all_modules" | grep ^"$module_on"$)" ]; then
-                modules_on+="\n$module_on"
+                modules_on="$modules_on\n$module_on"
             else
                 case "$arg_str" in
                   --all)
-                    modules+="\n$all_modules"
+                    modules="$modules\n$all_modules"
                     ;;
                   --all-cli)
-                    modules+="\n$all_cli_modules"
+                    modules="$modules\n$all_cli_modules"
                     ;;
                   --all-ruby)
-                    modules+="\n$all_ruby_modules"
+                    modules="$modules\n$all_ruby_modules"
                     ;;
                   --all-sh)
-                    modules+="\n$all_sh_modules"
+                    modules="$modules\n$all_sh_modules"
                     ;;
                   --dry-run | -n)
                     dry_run=true
@@ -151,7 +151,7 @@ parse_args() {
     modules_off="$(printf "$modules_off" | tail -n +2)"
 
     if [ -z "$modules" ] && [ -z "$modules_on" ] && [ -z "$modules_off" ]; then
-        modules+="\n$all_cli_modules"
+        modules="$modules\n$all_cli_modules"
     fi
 
     modules="$(printf "$modules\n$modules_on" | sed /^$/d | uniq)"
@@ -166,7 +166,7 @@ parse_args $@
 
 link='ln -s'
 if [ "$force" ]; then
-    link+='f'
+    link="$linkf"
 fi
 
 printf 'installing modules:' >&2
