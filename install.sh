@@ -185,7 +185,7 @@ if [ -n "$(printf "$modules" | grep ^bin$)" ]; then
         mkdir -p "$HOME"/bin || fail=true
         $link "$src_root"/bin/* "$HOME"/bin/ || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^sh$)" ]; then
@@ -196,7 +196,7 @@ if [ -n "$(printf "$modules" | grep ^sh$)" ]; then
         mkdir -p "$HOME"/.sh || fail=true
         $link "$src_root"/.sh/* "$HOME"/.sh/ || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^bash$)" ]; then
@@ -208,7 +208,7 @@ if [ -n "$(printf "$modules" | grep ^bash$)" ]; then
         mkdir -p "$HOME"/.bash || fail=true
         $link "$src_root"/.bash/* "$HOME"/.bash/ || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^zsh$)" ]; then
@@ -219,7 +219,7 @@ if [ -n "$(printf "$modules" | grep ^zsh$)" ]; then
         mkdir -p "$HOME"/.zsh || fail=true
         $link "$src_root"/.zsh/* "$HOME"/.zsh/ || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^oh-my-zsh$)" ]; then
@@ -232,7 +232,7 @@ if [ -n "$(printf "$modules" | grep ^oh-my-zsh$)" ]; then
         sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
           || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^oh-my-zsh-custom$)" ]; then
@@ -241,7 +241,7 @@ if [ -n "$(printf "$modules" | grep ^oh-my-zsh-custom$)" ]; then
     if [ ! "$dry_run" ]; then
         "$src_root"/.oh-my-zsh/custom/plugins/install.sh || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^git$)" ]; then
@@ -250,7 +250,7 @@ if [ -n "$(printf "$modules" | grep ^git$)" ]; then
     if [ ! "$dry_run" ]; then
         $link "$src_root"/.gitconfig "$HOME"/.gitconfig || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^irb$)" ]; then
@@ -259,7 +259,7 @@ if [ -n "$(printf "$modules" | grep ^irb$)" ]; then
     if [ ! "$dry_run" ]; then
         $link "$src_root"/.irbrc "$HOME"/.irbrc || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^rvm$)" ]; then
@@ -268,7 +268,7 @@ if [ -n "$(printf "$modules" | grep ^rvm$)" ]; then
     if [ ! "$dry_run" ]; then
         $link "$src_root"/.rvmrc "$HOME"/.rvmrc || fail=true
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
 
 if [ -n "$(printf "$modules" | grep ^kde$)" ]; then
@@ -281,5 +281,5 @@ if [ -n "$(printf "$modules" | grep ^kde$)" ]; then
                popd > /dev/null
              }
     fi
-    [ "$fail" ] && exit 1
+    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
