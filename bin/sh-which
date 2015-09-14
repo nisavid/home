@@ -1,4 +1,6 @@
-#!/bin/sh ## which(1) written in pure POSIX shell.
+#!/bin/sh
+
+## which(1) written in pure POSIX shell.
 
 ## A `which` utility is *not* included in the POSIX standard.
 ## This version upports -s (silent) and -a (all), and -v (verbose).

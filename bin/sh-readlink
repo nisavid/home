@@ -1,4 +1,6 @@
-#!/bin/sh ## readlink(1), realpath(1) with GNU extensions like `readlink -f`.
+#!/bin/sh
+
+## readlink(1), realpath(1) with GNU extensions like `readlink -f`.
 
 ## A XSI/POSIX shell implementation of readlink(1), supporting GNU extensions.
 ## Also a realpath(1) [like the mksh builtin], but doesn't wrap realpath(3).
