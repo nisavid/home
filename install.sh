@@ -86,7 +86,7 @@ src_root="$($(dirname $0)/bin/sh-readlink -f $(dirname $0))"
 
 os="$(uname -s)"
 distro=
-if [ "$os" == 'Linux' ]; then
+if [ "$os" = 'Linux' ]; then
     if [ -n "$(grep Ubuntu /etc/*-release)" ]; then
         distro='Ubuntu'
     elif [ -n "$(grep Mint /etc/*-release)" ]; then
