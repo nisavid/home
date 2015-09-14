@@ -13,7 +13,7 @@ src_root="$($(dirname $0)/../../../bin/sh-readlink -f $(dirname $0))"
 dest_root="$HOME"/.oh-my-zsh/custom/plugins
 
 mkdir -p "$dest_root" || exit 1
-pushd "$dest_root" > /dev/null \
+cd "$dest_root" \
   && { find "$src_root" -mindepth 1 -maxdepth 1 -type d \
          | while read plugin_dir; do
                plugin_name="$(basename "$plugin_dir")"
@@ -25,5 +25,5 @@ pushd "$dest_root" > /dev/null \
                        "$plugin_name"
                fi
            done
-       popd > /dev/null
+       cd - > /dev/null
      }

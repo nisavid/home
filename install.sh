@@ -280,10 +280,10 @@ if [ -n "$(printf "$modules" | grep ^kde$)" ]; then
     echo 'linking ~/.kde/ files' >&2
     unset fail
     if [ ! "$dry_run" ]; then
-        pushd "$src_root" > /dev/null \
+        cd "$src_root" \
           && { find .kde -type f -exec $link "$HOME"/\{\} "$src_root"/\{\} \; \
                  || fail=true
-               popd > /dev/null
+               cd - > /dev/null
              }
     fi
     [ "$fail" ] && [ ! "$keep_going" ] && exit 1
