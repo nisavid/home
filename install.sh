@@ -189,7 +189,7 @@ if [ -n "$(printf "$modules" | grep ^bin$)" ]; then
 fi
 
 if [ -n "$(printf "$modules" | grep ^sh$)" ]; then
-    echo 'linking ~/.sh/ files' >&2
+    echo 'linking shell files' >&2
     unset fail
     if [ ! "$dry_run" ]; then
         $link "$src_root"/.shrc "$HOME"/.shrc || fail=true
@@ -200,7 +200,7 @@ if [ -n "$(printf "$modules" | grep ^sh$)" ]; then
 fi
 
 if [ -n "$(printf "$modules" | grep ^bash$)" ]; then
-    echo 'linking ~/.bash/ files' >&2
+    echo 'linking Bash files' >&2
     unset fail
     if [ ! "$dry_run" ]; then
         $link "$src_root"/.bash_profile "$HOME"/.bash_profile || fail=true
@@ -212,7 +212,7 @@ if [ -n "$(printf "$modules" | grep ^bash$)" ]; then
 fi
 
 if [ -n "$(printf "$modules" | grep ^zsh$)" ]; then
-    echo 'linking ~/.zsh/ files' >&2
+    echo 'linking Zsh files' >&2
     unset fail
     if [ ! "$dry_run" ]; then
         $link "$src_root"/.zshrc "$HOME"/.zshrc || fail=true
