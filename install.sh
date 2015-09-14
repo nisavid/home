@@ -229,8 +229,13 @@ if [ -n "$(printf "$modules" | grep ^oh-my-zsh$)" ]; then
         if [ "$force" ]; then
             rm -rf "$HOME"/.oh-my-zsh || fail=true
         fi
-        sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
-          || fail=true
+
+        if [ -e "$HOME"/.oh-my-zsh ]; then
+            fail=true
+        else
+            sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
+              || fail=true
+        fi
     fi
     [ "$fail" ] && [ ! "$keep_going" ] && exit 1
 fi
