@@ -1,12 +1,16 @@
 [user]
 	name = Ivan D Vasin
 	email = nisavid@gmail.com
+[credential]
+	helper = osxkeychain
 [core]
 	autocrlf = input
 	safecrlf = warn
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [branch]
 	autosetuprebase = always
+[merge]
+	tool = kdiff3
 [push]
 	default = simple
 [alias]
