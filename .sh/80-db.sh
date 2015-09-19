@@ -10,7 +10,8 @@ alias mysql="expect <(echo 'spawn -noecho mysql {*}\$argv
                                         send [concat \
                                                   SET \
                                                   TRANSACTION ISOLATION LEVEL \
-                                                  READ COMMITTED\;]\r
+                                                  READ COMMITTED\;]
+                                        send \"\r\"
                                     }
                                     interact
                                 }
