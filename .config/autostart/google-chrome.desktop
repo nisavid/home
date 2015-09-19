@@ -1,0 +1,6 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Terminal=false
+Exec=/opt/google/chrome/google-chrome --no-startup-window
+Name=Google Chrome

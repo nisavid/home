@@ -1,0 +1,29 @@
+[$Version]
+update_info=konsole.upd:2.9.0-global-options
+
+[Desktop Entry]
+DefaultProfile=Shell.profile
+
+[Favorite Profiles]
+Favorites=Shell.profile
+
+[KonsoleWindow]
+ShowWindowTitleOnTitleBar=true
+
+[MainWindow]
+Height 1080=1081
+Height 1440=1441
+Height 1800=1801
+Height 2160=2161
+Height 3960=3961
+MenuBar=Enabled
+State=
+ToolBarsMovable=Disabled
+Width 1920=1262
+Width 2560=1371
+Width 2880=1262
+Width 3840=1262
+
+[TabBar]
+NewTabBehavior=PutNewTabAfterCurrentTab
+ShowQuickButtons=true
