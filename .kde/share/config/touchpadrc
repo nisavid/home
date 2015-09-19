@@ -1,8 +1,0 @@
-[parameters]
-CircScrollDelta=5.73
-CoastingFriction=50
-HorizTwoFingerScroll=true
-RBCornerButton=NoButton
-RTCornerButton=NoButton
-ThreeFingerTapButton=MiddleButton
-VertEdgeScroll=false

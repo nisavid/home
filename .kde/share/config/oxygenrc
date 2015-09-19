@@ -1,9 +1,0 @@
-[$Version]
-update_info=oxygen.upd:1
-
-[Style]
-StackedWidgetTransitionsEnabled=true
-
-[Windeco]
-ButtonSize=ButtonVeryLarge
-FrameBorder=BorderLarge
