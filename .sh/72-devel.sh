@@ -12,8 +12,8 @@ path_affix post "$RIPDIR/active/bin"
 
 
 # Python environment
-PYENVS=("$HOME"/pyenv/devel "$HOME"/pyenv/prod "$HOME"/pyenv/py3devel
-        "$HOME"/pyenv/py3prod ${PYENVS[@]})
+PYENVS=("$HOME"/.pyenv/devel "$HOME"/.pyenv/prod "$HOME"/.pyenv/py3devel
+        "$HOME"/.pyenv/py3prod ${PYENVS[@]})
 
 
 [[ $- == *i* ]] || return
@@ -26,15 +26,15 @@ PYENVS=("$HOME"/pyenv/devel "$HOME"/pyenv/prod "$HOME"/pyenv/py3devel
 alias ipy='ipython'
 
 # Python environment
-alias ad='. "$HOME"/pyenv/devel/bin/activate'
-alias ad3='. "$HOME"/pyenv/py3devel/bin/activate'
-alias ap='. "$HOME"/pyenv/prod/bin/activate'
-alias ap3='. "$HOME"/pyenv/py3prod/bin/activate'
+alias ad='. "$HOME"/.pyenv/devel/bin/activate'
+alias ad3='. "$HOME"/.pyenv/py3devel/bin/activate'
+alias ap='. "$HOME"/.pyenv/prod/bin/activate'
+alias ap3='. "$HOME"/.pyenv/py3prod/bin/activate'
 
 # systems administration
-alias pipd='"$HOME"/pyenv/devel/bin/pip'
-alias pipp='"$HOME"/pyenv/devel/bin/pip'
+alias pipd='"$HOME"/.pyenv/devel/bin/pip'
+alias pipp='"$HOME"/.pyenv/devel/bin/pip'
 
 # project administration
-alias maked='make PYENV="$HOME"/pyenv/devel'
-alias makep='make PYENV="$HOME"/pyenv/prod'
+alias maked='make PYENV="$HOME"/.pyenv/devel'
+alias makep='make PYENV="$HOME"/.pyenv/prod'
