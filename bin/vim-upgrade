@@ -3,7 +3,7 @@
 # Upgrade Vim
 
 ok=1
-pushd ~/.vim > /dev/null \
+pushd ~/.spf13-vim-3 > /dev/null \
  && { git pull || unset ok
       popd > /dev/null
       [[ -n "$ok" ]] || false
