@@ -13,9 +13,9 @@ if [[ -n "$(which dircolors 2> /dev/null)" ]]; then
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    alias grep='grep --line-number --color=auto'
+    alias fgrep='fgrep --line-number --color=auto'
+    alias egrep='egrep --line-number --color=auto'
 fi
 
 
