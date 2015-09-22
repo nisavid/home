@@ -29,6 +29,9 @@
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
+	mg = merge
+	mgf = merge --ff-only
+	mgnf = merge --no-ff
 	rmc = rm --cached
 	st = status
 [color]
