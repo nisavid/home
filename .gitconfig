@@ -5,6 +5,7 @@
 	autocrlf = input
 	safecrlf = warn
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore_global
 	askpass = /usr/bin/ksshaskpass
 [branch]
 	autosetuprebase = always
@@ -21,6 +22,7 @@
 	cfgl = config --local
 	ci = commit
 	cia = commit --amend
+	ciamh = commit --amend --reuse-message HEAD
 	co = checkout
 	df = diff --diff-algorithm=histogram --find-copies --find-renames
 	dfc = diff --diff-algorithm=histogram --find-copies --find-renames --cached
@@ -32,6 +34,9 @@
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
+	mg = merge
+	mgf = merge --ff-only
+	mgnf = merge --no-ff
 	rmc = rm --cached
 	st = status
 [color]
@@ -55,3 +60,5 @@
 	untracked = cyan
 [gui]
 	fontdiff = -family \"courier new\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+[grep]
+	lineNumber = true
