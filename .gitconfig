@@ -16,6 +16,7 @@
 	cfgl = config --local
 	ci = commit
 	cia = commit --amend
+	ciamh = commit --amend --reuse-message HEAD
 	co = checkout
 	df = diff --diff-algorithm=histogram --find-copies --find-renames
 	dfc = diff --diff-algorithm=histogram --find-copies --find-renames --cached
