@@ -1,6 +1,10 @@
 # Shell runtime configuration | SSH agent
 
 
+# on OS X, use OS X Keychain
+[[ "$(uname -o)" == 'Darwin' ]] && return
+
+
 export SSH_ENV="$HOME/.ssh/env"
 
 
