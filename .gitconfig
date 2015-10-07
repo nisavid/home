@@ -62,3 +62,5 @@
 	fontdiff = -family \"courier new\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
 [grep]
 	lineNumber = true
+[log]
+	date = iso
