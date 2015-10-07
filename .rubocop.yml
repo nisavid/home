@@ -1,0 +1,20 @@
+Lint/ParenthesesAsGroupedExpression:
+    Enabled: false
+
+Metrics/LineLength:
+    Enabled: false
+
+Style/Documentation:
+    Enabled: false
+
+Style/EachWithObject:
+    Enabled: false
+
+Style/LeadingCommentSpace:
+    Enabled: false
+
+Style/SingleLineBlockParams:
+    Enabled: false
+
+Style/TrailingComma:
+    EnforcedStyleForMultiline: comma
