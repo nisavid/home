@@ -14,11 +14,14 @@
 	br = branch
 	cfg = config
 	cfgg = config --global
+	cfgge = config --global --edit
 	cfgl = config --local
+	cfgle = config --local --edit
 	ci = commit
 	cia = commit --amend
 	ciamh = commit --amend --reuse-message HEAD
 	co = checkout
+	curbr = symbolic-ref --short HEAD
 	df = diff --diff-algorithm=histogram --find-copies --find-renames
 	dfc = diff --diff-algorithm=histogram --find-copies --find-renames --cached
 	dfcs = diff --diff-algorithm=histogram --find-copies --find-renames --cached --stat
@@ -32,6 +35,9 @@
 	mg = merge
 	mgf = merge --ff-only
 	mgnf = merge --no-ff
+	rb = rebase
+	rbi = rebase --interactive
+	rbiu = rebase --interactive @{upstream}
 	rmc = rm --cached
 	st = status
 [color]
