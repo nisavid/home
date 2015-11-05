@@ -1,11 +1,13 @@
+#!/bin/sh
 # Shell runtime configuration | Ivan D Vasin
 
-
-[[ $- == *i* ]] || return
+[ -t 0 ] || return
 # interactive shell -----------------------------------------------------------
 
-
 # aliases
+
+# core tools
+alias v='vim -p'
 
 # Vim sessions
 alias vbf="vim '+SessionOpen bedframe'"

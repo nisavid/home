@@ -10,41 +10,70 @@
 [branch]
 	autosetuprebase = always
 [diff]
+	algorithm = histogram
 	tool = kompare
+[grep]
+	lineNumber = true
+[log]
+	date = iso
 [merge]
 	tool = kdiff3
 [push]
 	default = simple
 [alias]
+	a = add --patch
+	aa = add --all
 	br = branch
+	brc = symbolic-ref --short HEAD
 	cfg = config
 	cfgg = config --global
 	cfgge = config --global --edit
 	cfgl = config --local
 	cfgle = config --local --edit
+	chp = cherry-pick
+	chpa = cherry-pick --abort
+	chpc = cherry-pick --continue
 	ci = commit
 	cia = commit --amend
-	ciamh = commit --amend --reuse-message HEAD
+	cian = commit --amend --no-edit
+	cim = commit --message
+	cin = commit --no-edit
 	co = checkout
-	curbr = symbolic-ref --short HEAD
-	df = diff --diff-algorithm=histogram --find-copies --find-renames
-	dfc = diff --diff-algorithm=histogram --find-copies --find-renames --cached
-	dfcs = diff --diff-algorithm=histogram --find-copies --find-renames --cached --stat
-	dfs = diff --diff-algorithm=histogram --find-copies --find-renames --stat
-	lgd = log --patch --diff-algorithm=histogram --find-copies --find-renames
+	co- = checkout -
+	cob = checkout -b
+	cogl = checkout HEAD -- Gemfile.lock
+	coma = checkout master
+	d = diff --find-copies --find-renames
+	dc = diff --find-copies --find-renames --cached
+	dcs = diff --find-copies --find-renames --cached --stat
+	ds = diff --find-copies --find-renames --stat
+	lgd = log --patch --find-copies --find-renames
 	lgs = log --stat
-	lgsd = log --stat --patch --diff-algorithm=histogram --find-copies --find-renames
+	lgsd = log --stat --patch --find-copies --find-renames
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
 	mg = merge
 	mgf = merge --ff-only
 	mgnf = merge --no-ff
+	pl = pull
+	ps = push
+	psc = pushcur
 	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
 	rbi = rebase --interactive
-	rbiu = rebase --interactive @{upstream}
+	rbima = rebase --interactive master
+	rbiup = rebase --interactive @{upstream}
+	rbma = rebase master
 	rmc = rm --cached
-	st = status
+	rs = reset
+	s = status
+	st = stash
+	sta = stash apply
+	stp = stash pop
+	sts = stash show
+	stsp = stash show --patch
 [color]
 	branch = auto
 	diff = auto
@@ -66,7 +95,3 @@
 	untracked = cyan
 [gui]
 	fontdiff = -family \"courier new\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
-[grep]
-	lineNumber = true
-[log]
-	date = iso
