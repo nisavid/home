@@ -1,4 +1,5 @@
-# Shell runtime configuration | Java home
+#!/bin/sh
+# Shell runtime configuration | Python environment
 
-
-declare -a JAVA_HOME_CANDIDATES
+# shellcheck disable=SC2034
+JAVA_HOMES=''

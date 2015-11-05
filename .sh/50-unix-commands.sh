@@ -1,15 +1,17 @@
+#!/bin/sh
 # Shell runtime configuration | customizations of common Unix commands
 
-
-[[ $- == *i* ]] || return
-# interactive shell -----------------------------------------------------------
-
+[ -t 0 ] || return
+# Interactive shell -----------------------------------------------------------
 
 # colored output
-if [[ -n "$(which dircolors 2> /dev/null)" ]]; then
-    test -r ~/.dircolors \
-     && eval "$(dircolors -b ~/.dircolors)" \
-     || eval "$(dircolors -b)"
+if [ -n "$(command -v dircolors 2> /dev/null)" ]; then
+    if [ -r "$HOME"/.dircolors ]; then \
+        eval "$(dircolors -b "$HOME"/.dircolors)"
+    else
+        eval "$(dircolors -b)"
+    fi
+
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -20,11 +22,12 @@ fi
 
 
 # file manipulation
-if [[ -n "$(which colordiff 2> /dev/null)" ]]; then
+if [ -n "$(command -v colordiff 2> /dev/null)" ]; then
     alias diff='colordiff --unified'
 else
     alias diff='diff --unified'
 fi
+
 alias l='ls --format=vertical --classify'
 alias la='l --almost-all'
 alias lal='l --all --format=verbose'

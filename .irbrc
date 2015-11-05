@@ -1,4 +1,5 @@
-require 'looksee'
 require 'rubygems'
+require 'pry'
 
-Looksee.editor = 'vim %f +%l'
+Pry.start
+exit
