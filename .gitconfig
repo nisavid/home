@@ -20,6 +20,7 @@
 	default = simple
 [alias]
 	br = branch
+	brc = symbolic-ref --short HEAD
 	cfg = config
 	cfgg = config --global
 	cfgge = config --global --edit
@@ -29,11 +30,10 @@
 	cia = commit --amend
 	cian = commit --amend --no-edit
 	co = checkout
-	curbr = symbolic-ref --short HEAD
-	df = diff --find-copies --find-renames
-	dfc = diff --find-copies --find-renames --cached
-	dfcs = diff --find-copies --find-renames --cached --stat
-	dfs = diff --find-copies --find-renames --stat
+	d = diff --find-copies --find-renames
+	dc = diff --find-copies --find-renames --cached
+	dcs = diff --find-copies --find-renames --cached --stat
+	ds = diff --find-copies --find-renames --stat
 	lgd = log --patch --find-copies --find-renames
 	lgs = log --stat
 	lgsd = log --stat --patch --find-copies --find-renames
@@ -47,7 +47,7 @@
 	rbi = rebase --interactive
 	rbiu = rebase --interactive @{upstream}
 	rmc = rm --cached
-	st = status
+	s = status
 [color]
 	branch = auto
 	diff = auto
