@@ -8,6 +8,14 @@
 	excludesfile = ~/.gitignore_global
 [branch]
 	autosetuprebase = always
+[diff]
+	algorithm = histogram
+[grep]
+	lineNumber = true
+[log]
+	date = iso
+[merge]
+	tool = kdiff3
 [push]
 	default = simple
 [alias]
@@ -19,16 +27,16 @@
 	cfgle = config --local --edit
 	ci = commit
 	cia = commit --amend
-	ciamh = commit --amend --reuse-message HEAD
+	cian = commit --amend --no-edit
 	co = checkout
 	curbr = symbolic-ref --short HEAD
-	df = diff --diff-algorithm=histogram --find-copies --find-renames
-	dfc = diff --diff-algorithm=histogram --find-copies --find-renames --cached
-	dfcs = diff --diff-algorithm=histogram --find-copies --find-renames --cached --stat
-	dfs = diff --diff-algorithm=histogram --find-copies --find-renames --stat
-	lgd = log --patch --diff-algorithm=histogram --find-copies --find-renames
+	df = diff --find-copies --find-renames
+	dfc = diff --find-copies --find-renames --cached
+	dfcs = diff --find-copies --find-renames --cached --stat
+	dfs = diff --find-copies --find-renames --stat
+	lgd = log --patch --find-copies --find-renames
 	lgs = log --stat
-	lgsd = log --stat --patch --diff-algorithm=histogram --find-copies --find-renames
+	lgsd = log --stat --patch --find-copies --find-renames
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
@@ -61,7 +69,3 @@
 	untracked = cyan
 [gui]
 	fontdiff = -family \"courier new\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
-[grep]
-	lineNumber = true
-[log]
-	date = iso
