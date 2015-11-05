@@ -1,84 +1,73 @@
+#!/bin/sh
 # Shell runtime configuration | SSH agent
 
-
-# on OS X, use OS X Keychain
-[[ "$(uname -o)" == 'Darwin' ]] && return
-
+# on Mac, use OS X Keychain
+[ "$(uname -o)" = 'Darwin' ] && return
 
 export SSH_ENV="$HOME/.ssh/env"
 
-
-function ssh_agent_add_keys
-{
-    ssh-add
-}
-
-
-function ssh_agent_start
-{
+_ssh_agent_start() {
     ssh_dir="$(dirname "$SSH_ENV")"
-    if [[ ! -d "$ssh_dir" ]]; then
-        if [[ ! -e "$ssh_dir" ]]; then
+    if [ ! -d "$ssh_dir" ]; then
+        if [ ! -e "$ssh_dir" ]; then
             mkdir -p -m 0700 "$ssh_dir"
         else
-            echo "cannot start SSH agent: '$ssh_dir' is not a directory" >&2
+            echo "error: cannot start SSH agent: '$ssh_dir' is not a directory" >&2
             return
         fi
     fi
 
-    ssh-agent -s | "$GREP" -v '^echo' > "$SSH_ENV"
+    ssh-agent -s | command -v grep -v '^echo' > "$SSH_ENV"
     chmod 0600 "$SSH_ENV"
 
+    # shellcheck disable=SC1090
     . "$SSH_ENV" > /dev/null
 }
 
-
-if [[ -e "$SSH_AUTH_SOCK"
-      && -n "$SSH_AGENT_PID"
-      && -n "$(ps -fp "$SSH_AGENT_PID" | "$GREP" ssh-agent)" ]]; then
+if [ -e "$SSH_AUTH_SOCK" ] \
+    && [ -n "$SSH_AGENT_PID" ] \
+    && pgrep ssh-agent | cut -d ' ' -f 1 | grep -q "^$SSH_AGENT_PID$"; then
     # SSH agent was initialized elsewhere and was set up in this shell's env
 
-    if [[ $- == *i* ]]; then
+    if [ -t 0 ]; then
         # interactive shell
 
         if ! ssh-add -l >& /dev/null; then
             # SSH agent has no keys
 
-            ssh_agent_add_keys
+            ssh-add
         fi
     fi
 
-elif [[ -f "$SSH_ENV" ]]; then
+elif [ -f "$SSH_ENV" ]; then
     # SSH agent was initialized by this script (or equivalent)
 
+    # shellcheck disable=SC1090
     . "$SSH_ENV" > /dev/null
 
-    if ! [[ -e "$SSH_AUTH_SOCK"
-            && -n "$SSH_AGENT_PID"
-            && -n "$(ps -fp "$SSH_AGENT_PID" | "$GREP" ssh-agent)" ]]; then
+    if ! [ -e "$SSH_AUTH_SOCK" ] \
+        && [ -n "$SSH_AGENT_PID" ] && (pgrep ssh-agent | grep -q "^$SSH_AGENT_PID$"); then
         # SSH agent died
 
-        unset SSH_AUTH_SOCK
-        unset SSH_AGENT_PID
+        unset SSH_AUTH_SOCK SSH_AGENT_PID
 
-        if [[ $- == *i* ]]; then
+        if [ -t 0 ]; then
             # interactive shell
 
-            ssh_agent_start
-            ssh_agent_add_keys
+            _ssh_agent_start
+            ssh-add
         fi
     fi
 
 else
     # SSH agent was not initialized
 
-    if [[ $- == *i* ]]; then
+    if [ -t 0 ]; then
         # interactive shell
 
-        ssh_agent_start
-        ssh_agent_add_keys
+        _ssh_agent_start
+        ssh-add
     fi
 fi
 
-unset ssh_agent_add_keys
-unset ssh_agent_start
+unset _ssh_agent_start

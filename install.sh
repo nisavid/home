@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 usage="\
 usage: install.sh [options] [packages] [modules]
@@ -82,17 +83,8 @@ zsh
 oh-my-zsh
 oh-my-zsh-custom"
 
-src_root="$($(dirname $0)/bin/sh-readlink -f $(dirname $0))"
-
-os="$(uname -s)"
-distro=
-if [ "$os" = 'Linux' ]; then
-    if [ -n "$(grep Ubuntu /etc/*-release)" ]; then
-        distro='Ubuntu'
-    elif [ -n "$(grep Mint /etc/*-release)" ]; then
-        distro='Mint'
-    fi
-fi
+src_root_unresolved="$(dirname "$0")"
+src_root="$("$src_root_unresolved"/bin/sh-readlink -f "$src_root_unresolved")"
 
 parse_args() {
     modules_on=
@@ -103,14 +95,14 @@ parse_args() {
         arg_str="$1"
         shift
 
-        module_off="$(printf -- $arg_str | sed -n 's/^--no-\(.*\)$/\1/p')"
+        module_off="$(printf %s -- "$arg_str" | sed -n 's/^--no-\(.*\)$/\1/p')"
         if [ -n "$module_off" ] \
-           && [ -n "$(printf "$all_modules" | grep ^"$module_off"$)" ]; then
+           && printf %s "$all_modules" | grep -q ^"$module_off"$; then
             modules_off="$modules_off\n$module_off"
         else
-            module_on="$(printf -- $arg_str | sed -n 's/^--\(.*\)$/\1/p')"
+            module_on="$(printf %s -- "$arg_str" | sed -n 's/^--\(.*\)$/\1/p')"
             if [ -n "$module_on" ] \
-               && [ -n "$(printf "$all_modules" | grep ^"$module_on"$)" ]; then
+               && printf %s "$all_modules" | grep -q ^"$module_on"$; then
                 modules_on="$modules_on\n$module_on"
             else
                 case "$arg_str" in
@@ -147,146 +139,121 @@ parse_args() {
             fi
         fi
     done
-    modules_on="$(printf "$modules_on" | tail -n +2)"
-    modules_off="$(printf "$modules_off" | tail -n +2)"
+    modules_on="$(printf %s "$modules_on" | tail -n +2)"
+    modules_off="$(printf %s "$modules_off" | tail -n +2)"
 
     if [ -z "$modules" ] && [ -z "$modules_on" ] && [ -z "$modules_off" ]; then
-        modules="$modules\n$all_cli_modules"
+        modules="$(printf '%s\n%s' "$modules" "$all_cli_modules")"
     fi
 
-    modules="$(printf "$modules\n$modules_on" | sed /^$/d | uniq)"
+    modules="$(printf '%s\n%s' "$modules" "$modules_on" | sed /^$/d | uniq)"
 
     if [ -n "$modules_off" ]; then
-        modules_off_sed_args="$(for module in $(printf "$modules_off" | xargs); do printf " -e /$module/d"; done)"
-        modules="$(printf "$modules" | sed $modules_off_sed_args)"
+        modules_off_sed_args="$(for module in $(printf %s "$modules_off" | xargs); do printf %s " -e /$module/d"; done)"
+        # shellcheck disable=SC2086
+        modules="$(printf %s "$modules" | sed $modules_off_sed_args)"
     fi
 }
 
-parse_args $@
+parse_args "$@"
 
-link='ln -s'
-if [ "$force" ]; then
-    link="${link}f"
-fi
-
-printf 'installing modules:' >&2
+printf 'installing modules:'
 for module in $modules; do
-    printf " $module" >&2
+    printf %s " $module"
 done
-printf '\n' >&2
+printf '\n'
 
-echo using \'"$src_root"\' as root directory for installation sources and symlink targets \
-  >&2
+echo using \'"$src_root"\' as root directory for installation sources and symlink targets
 
-if [ -n "$(printf "$modules" | grep ^bin$)" ]; then
-    echo 'linking ~/bin/ files' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        mkdir -p "$HOME"/bin || fail=true
-        $link "$src_root"/bin/* "$HOME"/bin/ || fail=true
+modules_specs="\
+bin link_bin_files linking ~/bin/ files
+sh link_sh_files linking shell files
+bash link_bash_files linking Bash files
+oh-my-zsh install_omz installing Oh-My-Zsh
+oh-my-zsh-custom install_omz_custom installing Oh-My-Zsh custom plugins
+zsh link_zsh_files linking Zsh files
+git link_gitconfig linking ~/.gitconfig
+irb link_irbrc linking ~/.irbrc
+rvm link_rvmrc linking ~/.rvmrc
+kde link_kde_files linking ~/.kde/ files
+"
+
+# module functions ------------------------------------------------------------
+
+link() {
+    link='command ln'
+    if [ "$force" ]; then
+        link="${link} -f"
     fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
+    $link "$@"
+}
 
-if [ -n "$(printf "$modules" | grep ^sh$)" ]; then
-    echo 'linking shell files' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.shrc "$HOME"/.shrc || fail=true
-        mkdir -p "$HOME"/.sh || fail=true
-        $link "$src_root"/.sh/* "$HOME"/.sh/ || fail=true
+link_bin_files() {
+    mkdir -p "$HOME"/bin
+    $link "$src_root"/bin/* "$HOME"/bin/
+}
+
+link_sh_files() {
+    $link "$src_root"/.shrc "$HOME"/.shrc
+    mkdir -p "$HOME"/.sh
+    $link "$src_root"/.sh/* "$HOME"/.sh/
+}
+
+link_bash_files() {
+    $link "$src_root"/.bash_profile "$HOME"/.bash_profile
+    $link "$src_root"/.bashrc "$HOME"/.bashrc
+    mkdir -p "$HOME"/.bash
+    $link "$src_root"/.bash/* "$HOME"/.bash/
+}
+
+install_omz() {
+    if [ "$force" ]; then
+        rm -rf "$HOME"/.oh-my-zsh
     fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
 
-if [ -n "$(printf "$modules" | grep ^bash$)" ]; then
-    echo 'linking Bash files' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.bash_profile "$HOME"/.bash_profile || fail=true
-        $link "$src_root"/.bashrc "$HOME"/.bashrc || fail=true
-        mkdir -p "$HOME"/.bash || fail=true
-        $link "$src_root"/.bash/* "$HOME"/.bash/ || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
+    [ ! -e "$HOME"/.oh-my-zsh ]
 
-if [ -n "$(printf "$modules" | grep ^oh-my-zsh$)" ]; then
-    echo 'installing Oh-My-Zsh' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        if [ "$force" ]; then
-            rm -rf "$HOME"/.oh-my-zsh || fail=true
+    # XXX: ignore exit status because (as of 2015-09-13) it is always nonzero on Linux
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
+        || true
+}
+
+install_omz_custom() {
+    "$src_root"/.oh-my-zsh/custom/plugins/install.sh
+}
+
+link_zsh_files() {
+    $link "$src_root"/.zshrc "$HOME"/.zshrc
+    mkdir -p "$HOME"/.zsh
+    $link "$src_root"/.zsh/* "$HOME"/.zsh/
+}
+
+link_gitconfig() {
+    $link "$src_root"/.gitconfig "$HOME"/.gitconfig
+}
+
+link_irbrc() {
+    $link "$src_root"/.irbrc "$HOME"/.irbrc
+}
+
+link_rvmrc() {
+    $link "$src_root"/.rvmrc "$HOME"/.rvmrc
+}
+
+link_kde_files() {
+    cd "$src_root"
+    # shellcheck disable=SC2086
+    find .kde -type f -exec $link "$HOME"/\{\} "$src_root"/\{\} \;
+    cd - >/dev/null
+}
+
+printf %s "$modules_specs" | while read -r module_name module_func module_message; do
+    if printf %s "$modules" | grep -q ^"$module_name"$; then
+        echo "$module_message"
+        if [ ! "$dry_run" ]; then
+            (set -e; "$module_func")
+            ret=$?
+            [ $ret -eq 0 ] || [ "$keep_going" ] || exit $ret
         fi
-
-        if [ -e "$HOME"/.oh-my-zsh ]; then
-            fail=true
-        else
-            # XXX:
-            #   ignore exit status because (as of 2015-09-13) it is always
-            #   nonzero on Linux
-            sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        fi
     fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
-if [ -n "$(printf "$modules" | grep ^oh-my-zsh-custom$)" ]; then
-    echo 'installing Oh-My-Zsh custom plugins' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        "$src_root"/.oh-my-zsh/custom/plugins/install.sh || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
-if [ -n "$(printf "$modules" | grep ^zsh$)" ]; then
-    echo 'linking Zsh files' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.zshrc "$HOME"/.zshrc || fail=true
-        mkdir -p "$HOME"/.zsh || fail=true
-        $link "$src_root"/.zsh/* "$HOME"/.zsh/ || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
-if [ -n "$(printf "$modules" | grep ^git$)" ]; then
-    echo 'linking ~/.gitconfig' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.gitconfig "$HOME"/.gitconfig || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
-if [ -n "$(printf "$modules" | grep ^irb$)" ]; then
-    echo 'linking ~/.irbrc' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.irbrc "$HOME"/.irbrc || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
-if [ -n "$(printf "$modules" | grep ^rvm$)" ]; then
-    echo 'linking ~/.rvmrc' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        $link "$src_root"/.rvmrc "$HOME"/.rvmrc || fail=true
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
-
-if [ -n "$(printf "$modules" | grep ^kde$)" ]; then
-    echo 'linking ~/.kde/ files' >&2
-    unset fail
-    if [ ! "$dry_run" ]; then
-        cd "$src_root" \
-          && { find .kde -type f -exec $link "$HOME"/\{\} "$src_root"/\{\} \; \
-                 || fail=true
-               cd - > /dev/null
-             }
-    fi
-    [ "$fail" ] && [ ! "$keep_going" ] && exit 1
-fi
+done

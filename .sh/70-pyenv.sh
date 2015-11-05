@@ -1,4 +1,5 @@
+#!/bin/sh
 # Shell runtime configuration | Python environment
 
-
-declare -a PYENVS
+# shellcheck disable=SC2034
+PYENVS=''
