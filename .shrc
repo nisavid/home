@@ -1,68 +1,157 @@
+#!/bin/sh
 # Shell runtime configuration
 
+# Utilities -------------------------------------------------------------------
+
+SHELL_CMD="$(ps -o comm -p $$ | tail -n +2)"
+export SHELL_CMD
+
+strlist() {
+    [ $# -eq 0 ] && return
+    while [ $# -gt 1 ]; do
+        #printf %s\\0 "$1" | xxd -p | tr -d '\n'
+        printf %s: "$1"
+        shift
+    done
+    #printf %s "$1" | xxd -p | tr -d '\n'
+    printf %s "$1"
+}
+
+strlist_len() {
+    #printf %s $(($(printf %s "$1" | xxd -r -p | tr -dC '\000' | wc -m) + 1))
+    printf %s $(($(printf %s "$1" | tr -dC : | wc -m) + 1))
+}
+
+#strlist_at() {
+#    # FIXME
+#
+#    local list0="$1"
+#    local entry_i=0
+#    while [ "$entry_i" != "$2" ] && [ -n "$list0" ]; do
+#        [ "$(expr "X$list0" : 'X00.*')" ] && entry_i=$((entry_i + 1))
+#        list0="$(printf %s "$list0" | tail -c +3)"
+#    done
+#
+#    [ -z "$list0" ] && return 1
+#
+#    local list1="$list0"
+#    local end_char_i=0
+#    while [ "$end_char_i" -lt "${#list1}" ]; do
+#        expr "X$list1" : 'X00.*' >/dev/null && break
+#        list1="$(printf %s "$list1" | tail -c +3)"
+#        end_char_i=$((end_char_i + 2))
+#    done
+#
+#    [ "$end_char_i" -eq 0 ] && printf ''
+#
+#    printf %s "$list0" | head -c "$end_char_i" | xxd -r -p
+#}
+#
+#strlist_each() {
+#    # FIXME
+#
+#    local list0="$1"
+#    local list1="$1"
+#    shift
+#    local end_char_i=0
+#    while [ "$end_char_i" -lt "${#list}" ]; do
+#        if expr "X$list" : 'X00.*' >/dev/null; then
+#            entry="$(printf %s "$list" | head -c "$end_char_i" | xxd -r -p)"
+#            echo entry: "$entry"
+#            eval "$@" "$entry" || return
+#        fi
+#        list="$(printf %s "$list" | tail -c +3)"
+#        end_char_i=$((end_char_i + 2))
+#    done
+#}
 
 # Local config ----------------------------------------------------------------
 
-
-PRE_SHRCS=()
-SHRC_DIRS=("$HOME"/.sh)
-export SHELL_CMD="$(ps -o comm $$ | tail -n +2)"
+PRE_SHRCS=''
+SHRC_DIRS="$HOME"/.sh
 case "$SHELL_CMD" in
-  bash)
-    PRE_SHRCS=(/etc/bashrc /etc/bash.bashrc /etc/bash/bashrc)
-    SHRC_DIRS+=("$HOME"/.bash)
-    export SHELL_NAME='Bash'
-    ;;
-  csh)
-    SHRC_DIRS+=("$HOME"/.csh)
-    export SHELL_NAME='csh'
-    ;;
-  fish)
-    SHRC_DIRS+=("$HOME"/.fish)
-    export SHELL_NAME='fish'
-    ;;
-  tcsh)
-    SHRC_DIRS+=("$HOME"/.csh "$HOME"/.tcsh)
-    export SHELL_NAME='tcsh'
-    ;;
-  zsh|-zsh)
-    SHRC_DIRS+=("$HOME"/.zsh)
-    export SHELL_NAME='Zsh'
-    ;;
+    bash)
+        PRE_SHRCS="$(strlist /etc/bashrc /etc/bash.bashrc /etc/bash/bashrc)"
+        SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.bash)"
+        export SHELL_NAME='Bash'
+        ;;
+    csh)
+        SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.csh)"
+        export SHELL_NAME='csh'
+        ;;
+    fish)
+        SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.fish)"
+        export SHELL_NAME='fish'
+        ;;
+    tcsh)
+        SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.csh "$HOME"/.tcsh)"
+        export SHELL_NAME='tcsh'
+        ;;
+    zsh|-zsh)
+        SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.zsh)"
+        export SHELL_NAME='Zsh'
+        ;;
 esac
 
-
-GNU_CMD_DIRS=(
-    "$(which brew > /dev/null 2> /dev/null \
-        && brew --prefix)"/opt/coreutils/libexec/gnubin
-    /opt/local/libexec/gnubin
-    )
-
+if command -v brew > /dev/null 2>&1; then
+    GNU_CMD_DIRS="$(strlist "$PRE_SHRCS" "$(brew --prefix)"/opt/coreutils/libexec/gnubin)"
+fi
+GNU_CMD_DIRS="$(printf '%s\0%s' "$PRE_SHRCS" /opt/local/libexec/gnubin)"
 
 # External settings -----------------------------------------------------------
 
+abort=''
 
 # use GNU commands on non-GNU systems
-for dir in ${GNU_CMD_DIRS[@]}; do
-    if [[ -d "$dir" ]]; then
+while [ -n "$GNU_CMD_DIRS" ]; do
+    dir="${GNU_CMD_DIRS%%:*}"
+    if [ -d "$dir" ]; then
         PATH="$dir:$PATH"
         break
     fi
-done
-unset dir
-unset GNU_CMD_DIRS
-
-for rc in ${PRE_SHRCS[@]}; do
-    [[ -f "$rc" ]] && source "$rc"
-done
-unset rc
-
-for dir in ${SHRC_DIRS[@]}; do
-    if [[ -d "$dir" ]]; then
-        for file in $(ls "$dir"/* | sort); do
-            source "$file"
-        done
+    if [ "$GNU_CMD_DIRS" = "$dir" ]; then
+        GNU_CMD_DIRS=''
+    else
+        GNU_CMD_DIRS="${GNU_CMD_DIRS#*:}"
     fi
 done
-unset file
-unset dir
+unset GNU_CMD_DIRS dir
+
+#strlist_each "$PRE_SHRCS" source
+
+while [ -n "$PRE_SHRCS" ] && [ ! "$abort" ]; do
+    rc="${PRE_SHRCS%%:*}"
+
+    if [ -e "$rc" ]; then
+        # shellcheck source=/dev/null
+        source "$rc" || abort=1
+    fi
+
+    if [ "$PRE_SHRCS" = "$rc" ]; then
+        PRE_SHRCS=''
+    else
+        PRE_SHRCS="${PRE_SHRCS#*:}"
+    fi
+done
+unset PRE_SHRCS rc
+
+while [ -n "$SHRC_DIRS" ] && [ ! "$abort" ]; do
+    dir="${SHRC_DIRS%%:*}"
+
+    if [ -d "$dir" ]; then
+        for rc in "$dir"/*; do
+            # shellcheck source=/dev/null
+            source "$rc" || abort=1
+            [ "$abort" ] && break
+        done
+    fi
+
+    if [ "$SHRC_DIRS" = "$dir" ]; then
+        SHRC_DIRS=''
+    else
+        SHRC_DIRS="${SHRC_DIRS#*:}"
+    fi
+done
+unset SHRC_DIRS dir rc
+
+unset abort
