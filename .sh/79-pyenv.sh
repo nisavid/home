@@ -1,10 +1,19 @@
+#!/bin/sh
 # Shell runtime configuration | Python environment
 
+while [ -n "$PYENVS" ] && [ ! "$abort" ]; do
+    _pyenv="${PYENVS%%:*}"
 
-for pyenv in ${PYENVS[@]}; do
-    if [[ -f "$pyenv"/bin/activate ]]; then
-        source "$pyenv"/bin/activate
+    if [ -e "$_pyenv" ]; then
+        # shellcheck disable=SC1090
+        source "$_pyenv"/bin/activate
         break
     fi
+
+    if [ "$PYENVS" = "$_pyenv" ]; then
+        PYENVS=''
+    else
+        PYENVS="${PYENVS#*:}"
+    fi
 done
-unset pyenv
+unset _pyenv

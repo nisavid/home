@@ -1,14 +1,15 @@
+#!/bin/sh
 # Shell runtime configuration | command prompt | Ivan D Vasin
 
-
-[[ $- == *i* ]] || return
-# interactive shell -----------------------------------------------------------
-
+[ -t 0 ] || return
+# Interactive shell -----------------------------------------------------------
 
 # Powerline
-[[ -f "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
-   && -n "$(which powerline)" ]] \
- && . "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+# shellcheck disable=SC1090
+[ -f "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh ] \
+    && [ -n "$(which powerline)" ] \
+    && . "$HOME"/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
 
 # Promptline
-[[ -f "$HOME"/.promptline.sh ]] && . "$HOME"/.promptline.sh
+# shellcheck disable=SC1090
+[ -f "$HOME"/.promptline.sh ] && . "$HOME"/.promptline.sh
