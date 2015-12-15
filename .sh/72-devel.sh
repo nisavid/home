@@ -20,8 +20,29 @@ PYENVS="$(printf \
     "$HOME"/.pyenv/py2prod \
     "$PYENVS")"
 
+my() {
+    mysql "$@"
+}
+
 no_re() {
     RAILS_ENV='' "$@"
+}
+
+re_d() {
+    RAILS_ENV=development "$@"
+}
+
+re_p() {
+    RAILS_ENV=production "$@"
+}
+
+re_t() {
+    # shellcheck disable=SC2037
+    RAILS_ENV=test "$@"
+}
+
+zgm() {
+    no_re zeus generate migration
 }
 
 [ -t 0 ] || return
@@ -45,6 +66,3 @@ alias pipp='"$HOME"/.pyenv/devel/bin/pip'
 # project administration
 alias makepyd='make PYENV="$HOME"/.pyenv/devel'
 alias makepyp='make PYENV="$HOME"/.pyenv/prod'
-
-# Zeus
-alias zgm='no_re zeus generate migration'
