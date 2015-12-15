@@ -12,3 +12,11 @@ if [ -L "$_java_alt" ]; then
     fi
 fi
 unset _java_alt
+
+if [ -x '/usr/libexec/java_home' ]; then
+    _java_home="$(/usr/libexec/java_home)"
+    if [ -d "$_java_home" ]; then
+        JAVA_HOMES="$(printf '%s:%s' "$_java_home" "$JAVA_HOMES")"
+    fi
+fi
+unset _java_home
