@@ -45,18 +45,27 @@
 	dc = diff --find-copies --find-renames --cached
 	dcs = diff --find-copies --find-renames --cached --stat
 	ds = diff --find-copies --find-renames --stat
+	f = fetch
+	g = grep
+	l = log
 	lgd = log --patch --find-copies --find-renames
+	lgd = log --patch --find-copies --find-renames
+	lgd1 = log --patch --find-copies --find-renames -1
 	lgs = log --stat
+	lgs1 = log --stat -1
 	lgsd = log --stat --patch --find-copies --find-renames
+	lgsd1 = log --stat --patch --find-copies --find-renames -1
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
 	mg = merge
 	mgf = merge --ff-only
+	mgma = merge master
 	mgnf = merge --no-ff
 	pl = pull
 	ps = push
 	psc = pushcur
+	pso = push origin
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue
@@ -69,6 +78,7 @@
 	s = status
 	st = stash
 	sta = stash apply
+	stl = stash list
 	stp = stash pop
 	sts = stash show
 	stsp = stash show --patch
