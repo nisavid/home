@@ -2,12 +2,21 @@
 # Shell runtime configuration | Java home
 
 # Java home
-java_alt='/etc/alternatives/java'
-if [ -L "$java_alt" ]; then
-    java_alt="$(readlink -f "$java_alt" || readlink "$java_alt")"
 
-    if [ -n "$java_alt" ]; then
-        JAVA_HOMES="$(printf '%s\0%s' "$java_alt" "$JAVA_HOMES")"
+_java_alt='/etc/alternatives/java'
+if [ -L "$_java_alt" ]; then
+    _java_alt="$(readlink -f "$_java_alt" || readlink "$_java_alt")"
+
+    if [ -n "$_java_alt" ]; then
+        JAVA_HOMES="$(printf '%s:%s' "$_java_alt" "$JAVA_HOMES")"
     fi
 fi
-unset java_alt
+unset _java_alt
+
+if [ -x '/usr/libexec/java_home' ]; then
+    _java_home="$(/usr/libexec/java_home)"
+    if [ -d "$_java_home" ]; then
+        JAVA_HOMES="$(printf '%s:%s' "$_java_home" "$JAVA_HOMES")"
+    fi
+fi
+unset _java_home
