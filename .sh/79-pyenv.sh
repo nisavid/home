@@ -1,7 +1,7 @@
 #!/bin/sh
 # Shell runtime configuration | Python environment
 
-while [ -n "$PYENVS" ] && [ ! "$abort" ]; do
+while [ -n "$PYENVS" ]; do
     _pyenv="${PYENVS%%:*}"
 
     if [ -e "$_pyenv" ]; then

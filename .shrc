@@ -96,7 +96,7 @@ esac
 if command -v brew > /dev/null 2>&1; then
     GNU_CMD_DIRS="$(strlist "$PRE_SHRCS" "$(brew --prefix)"/opt/coreutils/libexec/gnubin)"
 fi
-GNU_CMD_DIRS="$(printf '%s\0%s' "$PRE_SHRCS" /opt/local/libexec/gnubin)"
+GNU_CMD_DIRS="$(printf '%s:%s' "$PRE_SHRCS" /opt/local/libexec/gnubin)"
 
 # External settings -----------------------------------------------------------
 
