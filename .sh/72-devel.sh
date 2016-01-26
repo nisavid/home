@@ -41,6 +41,10 @@ re_t() {
     RAILS_ENV=test "$@"
 }
 
+redis_purge() {
+    redis-cli KEYS '*' | sed 's/.*/"&"/' | xargs redis-cli DEL
+}
+
 zgm() {
     no_re zeus generate migration
 }
