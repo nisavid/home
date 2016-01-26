@@ -6,7 +6,7 @@ while [ -n "$PYENVS" ] && [ ! "$abort" ]; do
 
     if [ -e "$_pyenv" ]; then
         # shellcheck disable=SC1090
-        source "$_pyenv"/bin/activate
+        . "$_pyenv"/bin/activate
         break
     fi
 
