@@ -139,13 +139,12 @@ fi
 # Functions -------------------------------------------------------------------
 
 affix_to_path_var() {
-    local var="$1"
-    local position="$2"
-    local entry="$3"
+    var="$1"
+    position="$2"
+    entry="$3"
 
-    [ ! -d "$entry" ] && return
+    [ ! -d "$entry" ] && { unset var position entry; return; }
 
-    local value_prev
     value_prev="$(eval printf %s \$"$var")"
 
     # strip entry from beginning, middle, and end
@@ -161,9 +160,11 @@ affix_to_path_var() {
         *)
             ;;
     esac
+    unset position entry value_prev
 
     # shellcheck disable=SC2163
     export "$var"
+    unset var
 }
 
 in_dir() {
@@ -171,13 +172,13 @@ in_dir() {
     shift
 
     "$@"
-    local ret=$?
+    _ret=$?
 
-    cd - > /dev/null || return
+    cd - >/dev/null || return
 
-    return $ret
+    return $_ret
 }
 
 # Aliases ---------------------------------------------------------------------
 
-alias shrc='source "$HOME"/.shrc'
+alias shrc='. "$HOME"/.shrc'
