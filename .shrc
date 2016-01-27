@@ -96,7 +96,7 @@ esac
 if command -v brew > /dev/null 2>&1; then
     GNU_CMD_DIRS="$(strlist "$PRE_SHRCS" "$(brew --prefix)"/opt/coreutils/libexec/gnubin)"
 fi
-GNU_CMD_DIRS="$(printf '%s\0%s' "$PRE_SHRCS" /opt/local/libexec/gnubin)"
+GNU_CMD_DIRS="$(printf '%s:%s' "$PRE_SHRCS" /opt/local/libexec/gnubin)"
 
 # External settings -----------------------------------------------------------
 
@@ -117,14 +117,14 @@ while [ -n "$GNU_CMD_DIRS" ]; do
 done
 unset GNU_CMD_DIRS dir
 
-#strlist_each "$PRE_SHRCS" source
+#strlist_each "$PRE_SHRCS" .
 
 while [ -n "$PRE_SHRCS" ] && [ ! "$abort" ]; do
     rc="${PRE_SHRCS%%:*}"
 
     if [ -e "$rc" ]; then
-        # shellcheck source=/dev/null
-        source "$rc" || abort=1
+        # shellcheck disable=SC1090
+        . "$rc" || abort=1
     fi
 
     if [ "$PRE_SHRCS" = "$rc" ]; then
@@ -140,8 +140,8 @@ while [ -n "$SHRC_DIRS" ] && [ ! "$abort" ]; do
 
     if [ -d "$dir" ]; then
         for rc in "$dir"/*; do
-            # shellcheck source=/dev/null
-            source "$rc" || abort=1
+            # shellcheck disable=SC1090
+            . "$rc" || abort=1
             [ "$abort" ] && break
         done
     fi
