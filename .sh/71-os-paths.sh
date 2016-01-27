@@ -20,3 +20,8 @@ if [ -x '/usr/libexec/java_home' ]; then
     fi
 fi
 unset _java_home
+
+jvm_use() {
+    JAVA_HOME="$(/usr/libexec/java_home -v "$1")"
+    export JAVA_HOME
+}
