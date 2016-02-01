@@ -12,4 +12,4 @@ PATH="$(printf %s :"$PATH" | sed "s|:$HOME/\.rvm[^:]*/bin||g" | tail -c +2)"
 export PATH
 
 # shellcheck disable=SC1090
-[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then . "$HOME/.rvm/scripts/rvm"; fi
