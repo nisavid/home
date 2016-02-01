@@ -2,7 +2,7 @@
 # Shell runtime configuration | SSH agent
 
 # on Mac, use OS X Keychain
-[ "$(uname -o)" = 'Darwin' ] && return
+[ "$(uname -s)" = 'Darwin' ] && return
 
 export SSH_ENV="$HOME/.ssh/env"
 
