@@ -5,11 +5,13 @@
 	autocrlf = input
 	safecrlf = warn
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore.global
 [branch]
 	autosetuprebase = always
 [diff]
 	algorithm = histogram
+	renames = copies
+	mnemonicPrefix = true
 [grep]
 	lineNumber = true
 [log]
@@ -36,25 +38,25 @@
 	cian = commit --amend --no-edit
 	cim = commit --message
 	cin = commit --no-edit
+	cln = checkout HEAD -- db/schema.rb Gemfile.lock
 	co = checkout
 	co- = checkout -
 	cob = checkout -b
-	cogl = checkout HEAD -- Gemfile.lock
 	coma = checkout master
-	d = diff --find-copies --find-renames
-	dc = diff --find-copies --find-renames --cached
-	dcs = diff --find-copies --find-renames --cached --stat
-	ds = diff --find-copies --find-renames --stat
+	d = diff --word-diff=color
+	dc = diff --word-diff=color --cached
+	dcs = diff --word-diff=color --cached --stat
+	ds = diff --word-diff=color --stat
 	f = fetch
 	g = grep
 	l = log
-	lgd = log --patch --find-copies --find-renames
-	lgd = log --patch --find-copies --find-renames
-	lgd1 = log --patch --find-copies --find-renames -1
+	lgd = log --patch
+	lgd = log --patch
+	lgd1 = log --patch -1
 	lgs = log --stat
 	lgs1 = log --stat -1
-	lgsd = log --stat --patch --find-copies --find-renames
-	lgsd1 = log --stat --patch --find-copies --find-renames -1
+	lgsd = log --stat --patch
+	lgsd1 = log --stat --patch -1
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
@@ -85,7 +87,9 @@
 [color]
 	branch = auto
 	diff = auto
+	grep = auto
 	interactive = auto
+	showBranch = auto
 	status = auto
 	ui = auto
 [color "branch"]
