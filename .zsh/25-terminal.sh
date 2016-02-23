@@ -1,17 +1,18 @@
 # Zsh runtime configuration | terminal setup
 
-
 [[ $- == *i* ]] || return
-# interactive shell -----------------------------------------------------------
+# Interactive shell -----------------------------------------------------------
 
 
-# key bindings
+# Key bindings ----------------------------------------------------------------
 
-# Up -> Recall the previous instance of the input as a substring in the command
-#       history
+# Up ->
+#   Recall the previous instance of the current line content as a substring in
+#   the command history
 bindkey '^[[A' history-substring-search-up
-# Down -> Recall the next instance of the input as a substring in the command
-#         history
+# Down ->
+#   Recall the next instance of the current line content as a substring in the
+#   command history
 bindkey '^[[B' history-substring-search-down
 # Right -> Move the cursor to the next character
 bindkey "^[[C" vi-forward-char

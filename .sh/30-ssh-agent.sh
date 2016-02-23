@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | SSH agent
+# Shell configuration | SSH agent
 
 # on Mac, use OS X Keychain
 [ "$(uname -s)" = 'Darwin' ] && return

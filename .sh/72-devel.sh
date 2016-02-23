@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | development
+# Shell configuration | development
 
 # Environment variables -------------------------------------------------------
 
@@ -41,18 +41,35 @@ re_t() {
     RAILS_ENV=test "$@"
 }
 
-redis_purge() {
-    redis-cli KEYS '*' | sed 's/.*/"&"/' | xargs redis-cli DEL
-}
-
-zgm() {
-    no_re zeus generate migration
-}
-
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
 # Developer tools -------------------------------------------------------------
+
+# FIXME: make wrappers work with completion and subshells
+#unalias g
+#g() {
+#    git "$@"
+#}
+
+redis_purge() {
+    redis-cli KEYS '*' | sed 's/.*/"&"/' | xargs redis-cli DEL
+}
+
+rspec() {
+    re_t command rspec "$@"
+}
+
+# FIXME: make wrappers work with completion and subshells
+alias v='vim -p'
+#unalias v
+#v() {
+#    vim -p "$@"
+#}
+
+zgm() {
+    no_re zeus generate migration
+}
 
 # Python
 alias ipy='ipython'

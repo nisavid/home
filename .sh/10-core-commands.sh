@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | core commands
+# Shell configuration | core commands
 
 if ! command -v realpath >/dev/null 2>&1; then
     realpath() {

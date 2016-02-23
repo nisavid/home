@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | Ruby environment
+# Shell configuration | Ruby environment
 
 path_affix post "$HOME/.rvm/bin"
 
