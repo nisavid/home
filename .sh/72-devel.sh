@@ -52,8 +52,8 @@ re_t() {
 #    git "$@"
 #}
 
-redis_purge() {
-    redis-cli KEYS '*' | sed 's/.*/"&"/' | xargs redis-cli DEL
+pryr() {
+    RUBYOPT=-rpry-rescue/peek/quit "$@"
 }
 
 rspec() {
@@ -66,6 +66,25 @@ alias v='vim -p'
 #v() {
 #    vim -p "$@"
 #}
+
+# FIXME: make wrappers work with completion and subshells
+alias vi=vim
+#vi() {
+#    vim "$@"
+#}
+
+vq() {
+    _tmpdir="$(mktemp -d -t vg.XXXXXXXX)"
+    _pipe="$_tmpdir"/pipe
+    mkfifo "$_pipe"
+    cat <&0 >"$_pipe" &
+    vim -q "$_pipe"
+    unset _tmpdir _pipe
+}
+
+vsl() {
+    vim +SessionList +only
+}
 
 zgm() {
     no_re zeus generate migration
