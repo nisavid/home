@@ -12,12 +12,38 @@ end
 
 # Looksee ---------------------------------------------------------------------
 
-require 'looksee'
-Looksee.editor = 'vim %f +%l'
+begin
+  require 'looksee'
+rescue LoadError
+end
+Looksee.editor = 'vim %f +%l' if defined? Looksee
 
 # Hirb ------------------------------------------------------------------------
 
-require 'hirb'
+begin
+  require 'hirb'
+rescue LoadError
+end
+if defined? Hirb
+  # from https://github.com/pry/pry/wiki/FAQ#how-can-i-use-the-hirb-gem-with-pry
+  # Slightly dirty hack to fully support in-session Hirb.disable/enable toggling
+  Hirb::View.instance_eval do
+    def enable_output_method
+      @output_method = true
+      @old_print = Pry.config.print
+      Pry.config.print = proc do |*args|
+        Hirb::View.view_or_page_output(args[1]) || @old_print.call(*args)
+      end
+    end
+
+    def disable_output_method
+      Pry.config.print = @old_print
+      @output_method = nil
+    end
+  end
+
+  Hirb.enable
+end
 
 # Rails -----------------------------------------------------------------------
 
