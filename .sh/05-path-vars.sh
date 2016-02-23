@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | path variables
+# Shell configuration | path variables
 
 # Helpers ---------------------------------------------------------------------
 

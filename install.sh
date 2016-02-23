@@ -106,35 +106,15 @@ parse_args() {
                 modules_on="$modules_on\n$module_on"
             else
                 case "$arg_str" in
-                  --all)
-                    modules="$modules\n$all_modules"
-                    ;;
-                  --all-cli)
-                    modules="$modules\n$all_cli_modules"
-                    ;;
-                  --all-ruby)
-                    modules="$modules\n$all_ruby_modules"
-                    ;;
-                  --all-sh)
-                    modules="$modules\n$all_sh_modules"
-                    ;;
-                  --dry-run | -n)
-                    dry_run=true
-                    ;;
-                  --force | -f)
-                    force=true
-                    ;;
-                  --keep-going | -k)
-                    keep_going=true
-                    ;;
-                  --help)
-                    echo "$usage"
-                    exit
-                    ;;
-                  *)
-                    echo "$usage" >&2
-                    exit 2
-                    ;;
+                  --all) modules="$modules\n$all_modules" ;;
+                  --all-cli) modules="$modules\n$all_cli_modules" ;;
+                  --all-ruby) modules="$modules\n$all_ruby_modules" ;;
+                  --all-sh) modules="$modules\n$all_sh_modules" ;;
+                  --dry-run | -n) dry_run=true ;;
+                  --force | -f) force=true ;;
+                  --keep-going | -k) keep_going=true ;;
+                  --help) echo "$usage"; exit ;;
+                  *) echo "$usage" >&2; exit 2 ;;
                 esac
             fi
         fi

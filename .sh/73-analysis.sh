@@ -1,4 +1,4 @@
-# Shell runtime configuration | analysis
+# Shell configuration | analysis
 
 
 # aliases

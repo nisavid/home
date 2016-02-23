@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | Java home
+# Shell configuration | Java home
 
 while [ -n "$JAVA_HOMES" ] && [ ! "$abort" ]; do
     _java_home="${JAVA_HOMES%%:*}"

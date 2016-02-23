@@ -1,0 +1,3 @@
+# User settings, overrides db settings and persists across installs.
+autolibs=rvm_pkg
+ruby_configure_flags=--with-readline-dir=/usr/local/Cellar/readline/current/lib
