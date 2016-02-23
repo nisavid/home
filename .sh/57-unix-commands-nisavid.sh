@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | customizations of common Unix commands | Ivan D Vasin
+# Shell configuration | customizations of common Unix commands | Ivan D Vasin
 
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
