@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | command prompt
+# Shell configuration | command prompt
 
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------

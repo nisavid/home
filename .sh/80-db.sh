@@ -1,4 +1,4 @@
-# Shell runtime configuration | database interaction
+# Shell configuration | database interaction
 
 # NOTE: disabled because it breaks 'mysql -e'
 #alias mysql="expect <(echo 'spawn -noecho mysql {*}\$argv

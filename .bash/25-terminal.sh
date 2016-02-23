@@ -1,8 +1,8 @@
-# Bash runtime configuration | terminal setup
+# Bash configuration | terminal setup
 
 
 [[ $- == *i* ]] || return
-# interactive shell -----------------------------------------------------------
+# Interactive shell -----------------------------------------------------------
 
 
 # shell options

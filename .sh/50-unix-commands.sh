@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | customizations of common Unix commands
+# Shell configuration | customizations of common Unix commands
 
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------

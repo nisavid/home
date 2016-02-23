@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | Python environment
+# Shell configuration | Python environment
 
 while [ -n "$PYENVS" ]; do
     _pyenv="${PYENVS%%:*}"
