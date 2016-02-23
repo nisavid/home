@@ -123,8 +123,11 @@ while [ -n "$PRE_SHRCS" ] && [ ! "$abort" ]; do
     rc="${PRE_SHRCS%%:*}"
 
     if [ -e "$rc" ]; then
+        # NOTE:
+        #   do not abort on nonzero exit, because these system-wide configs sometimes end in a
+        #   test that returns nonzero
         # shellcheck disable=SC1090
-        . "$rc" || abort=1
+        . "$rc"
     fi
 
     if [ "$PRE_SHRCS" = "$rc" ]; then
