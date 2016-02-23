@@ -3,6 +3,21 @@
 [[ $- == *i* ]] || return
 # Interactive shell -----------------------------------------------------------
 
+# History ---------------------------------------------------------------------
+
+export HISTSIZE=1200000000
+export SAVEHIST=1000000000
+
+setopt extended_history
+setopt no_hist_beep
+setopt hist_expire_dups_first
+setopt hist_find_no_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_no_store
+setopt hist_verify
+setopt inc_append_history
+setopt no_share_history
 
 # Key bindings ----------------------------------------------------------------
 
