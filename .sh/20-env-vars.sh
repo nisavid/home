@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | environment variables
+# Shell configuration | environment variables
 
 # Shell -----------------------------------------------------------------------
 

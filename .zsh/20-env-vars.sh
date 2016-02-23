@@ -2,7 +2,7 @@
 
 
 [[ $- == *i* ]] || return
-# interactive shell -----------------------------------------------------------
+# Interactive shell -----------------------------------------------------------
 
 
 # FIXME: this causes buggy behavior in the space character after the left
