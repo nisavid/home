@@ -1,8 +1,8 @@
 #!/bin/sh
-# Shell runtime configuration | terminal setup
+# Shell configuration | terminal setup
 
 [ -t 0 ] || return
-# interactive shell -----------------------------------------------------------
+# Interactive shell -----------------------------------------------------------
 
 # shell attributes
 set -o vi

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | Java home
+# Shell configuration | Java home
 
 # Java home
 

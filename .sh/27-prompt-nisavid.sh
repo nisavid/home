@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | command prompt | Ivan D Vasin
+# Shell configuration | command prompt | Ivan D Vasin
 
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------

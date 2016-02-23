@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell runtime configuration | development
+# Shell configuration | development
 
 # Environment variables -------------------------------------------------------
 
@@ -41,18 +41,54 @@ re_t() {
     RAILS_ENV=test "$@"
 }
 
-redis_purge() {
-    redis-cli KEYS '*' | sed 's/.*/"&"/' | xargs redis-cli DEL
+[ -t 0 ] || return
+# Interactive shell -----------------------------------------------------------
+
+# Developer tools -------------------------------------------------------------
+
+# FIXME: make wrappers work with completion and subshells
+#unalias g
+#g() {
+#    git "$@"
+#}
+
+pryr() {
+    RUBYOPT=-rpry-rescue/peek/quit "$@"
+}
+
+rspec() {
+    re_t command rspec "$@"
+}
+
+# FIXME: make wrappers work with completion and subshells
+alias v='vim -p'
+#unalias v
+#v() {
+#    vim -p "$@"
+#}
+
+# FIXME: make wrappers work with completion and subshells
+alias vi=vim
+#vi() {
+#    vim "$@"
+#}
+
+vq() {
+    _tmpdir="$(mktemp -d -t vg.XXXXXXXX)"
+    _pipe="$_tmpdir"/pipe
+    mkfifo "$_pipe"
+    cat <&0 >"$_pipe" &
+    vim -q "$_pipe"
+    unset _tmpdir _pipe
+}
+
+vsl() {
+    vim +SessionList +only
 }
 
 zgm() {
     no_re zeus generate migration
 }
-
-[ -t 0 ] || return
-# Interactive shell -----------------------------------------------------------
-
-# Developer tools -------------------------------------------------------------
 
 # Python
 alias ipy='ipython'
