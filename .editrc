@@ -1,0 +1,14 @@
+# Editline configuration
+
+# Ctrl + Left -> Move the cursor to the previous word
+bind "^[O5D" vi-prev-word
+# Ctrl + Right -> Move the cursor to the next word
+bind "^[O5C" vi-next-word
+# Ctrl + R ->
+#   Recall the previous instance of the following input as a substring in the
+#   command history
+bind "^R" em-inc-search-prev
+# Ctrl + S ->
+#   Recall the next instance of the following input as a substring in the
+#   command history
+bind "^S" em-inc-search-next
