@@ -38,7 +38,7 @@
 	cian = commit --amend --no-edit
 	cim = commit --message
 	cin = commit --no-edit
-	cln = checkout HEAD -- db/schema.rb Gemfile.lock
+	cle = clean-disposable
 	co = checkout
 	co- = checkout -
 	cob = checkout -b
