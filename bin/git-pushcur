@@ -1,7 +1,0 @@
-#!/bin/sh
-
-curbr="$(git symbolic-ref --short HEAD)"
-
-[ -z "$curbr" ] && exit 1
-
-git push -u origin "$curbr"
