@@ -18,6 +18,8 @@
 	date = iso
 [merge]
 	tool = kdiff3
+[pull]
+	rebase = preserve
 [push]
 	default = simple
 [alias]
