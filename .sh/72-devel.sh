@@ -46,6 +46,14 @@ re_t() {
 
 # Developer tools -------------------------------------------------------------
 
+be() {
+    bundle exec "$@"
+}
+
+bi() {
+    bundle install "$@"
+}
+
 # FIXME: make wrappers work with completion and subshells
 #unalias g
 #g() {

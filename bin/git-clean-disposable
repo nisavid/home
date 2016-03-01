@@ -1,0 +1,15 @@
+#!/bin/sh
+
+root="$(git rev-parse --show-toplevel)"
+
+ret=0
+cd "$root" && {
+    for pathspec in db/schema.rb Gemfile.lock; do
+        if [ -e "$pathspec" ]; then
+            git checkout HEAD -- "$pathspec" || { ret=$?; break; }
+        fi
+    done
+    # shellcheck disable=SC2164
+    cd - >/dev/null
+}
+exit $ret
