@@ -1,0 +1,9 @@
+#!/bin/sh
+
+current_tag="$(git tag --points-at HEAD)"
+
+[ -z "$current_tag" ] && exit 1
+
+# FIXME: ensure only one tag
+
+git push -u origin "$current_tag"
