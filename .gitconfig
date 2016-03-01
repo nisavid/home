@@ -20,6 +20,8 @@
 	date = iso
 [merge]
 	tool = kdiff3
+[pull]
+	rebase = preserve
 [push]
 	default = simple
 [alias]
@@ -40,7 +42,8 @@
 	cian = commit --amend --no-edit
 	cim = commit --message
 	cin = commit --no-edit
-	cln = checkout HEAD -- db/schema.rb Gemfile.lock
+	cle = clean-disposable
+	clo = clone
 	co = checkout
 	co- = checkout -
 	cob = checkout -b
@@ -68,7 +71,8 @@
 	mgnf = merge --no-ff
 	pl = pull
 	ps = push
-	psc = pushcur
+	pscb = push-current-branch
+	psct = push-current-tag
 	pso = push origin
 	rb = rebase
 	rba = rebase --abort
@@ -79,6 +83,9 @@
 	rbma = rebase master
 	rmc = rm --cached
 	rs = reset
+	rshard = reset --hard
+	rshardma = reset --hard master
+	rshardup = reset --hard @{upstream}
 	s = status
 	st = stash
 	sta = stash apply

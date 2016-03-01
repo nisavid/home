@@ -1,0 +1,19 @@
+#!/bin/sh
+
+usage="$(basename "$0") [true|false]"
+
+value='true'
+
+case $# in
+    0) ;;
+    1) value='false' ;;
+    *) echo "$usage" >&2; exit 2 ;;
+esac
+
+for branch in $(git branch --list | cut -c 3-); do
+    if git branch --remotes | cut -c 3- | grep -q "^origin/$branch$" \
+        && [ "$(git config branch."$branch".rebase)" != 'true' ]; then
+        echo setting branch "$branch" to rebase
+        git config branch."$branch".rebase "$value"
+    fi
+done

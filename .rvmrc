@@ -1,3 +1,4 @@
 # RVM config
 
 rvm_autoupdate_flag=2
+rvm_project_rvmrc=0
