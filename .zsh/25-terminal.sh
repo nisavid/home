@@ -1,4 +1,4 @@
-# Zsh runtime configuration | terminal setup
+# Zsh configuration | terminal setup
 
 [[ $- == *i* ]] || return
 # Interactive shell -----------------------------------------------------------
