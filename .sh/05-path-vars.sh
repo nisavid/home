@@ -26,6 +26,7 @@ BREW_PREFIX="$(which brew >/dev/null && brew --prefix)"
 if [ -d "$BREW_PREFIX" ]; then
     path_affix pre "$BREW_PREFIX"/bin
     path_affix pre "$BREW_PREFIX"/opt/coreutils/libexec/gnubin
+    path_affix pre "$BREW_PREFIX"/opt/curl/bin
     path_affix pre "$BREW_PREFIX"/opt/gnu-sed/libexec/gnubin
     path_affix pre "$BREW_PREFIX"/opt/gnu-tar/libexec/gnubin
     path_affix pre "$BREW_PREFIX"/opt/openssl/bin

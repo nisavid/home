@@ -55,3 +55,26 @@ affix_to_path_var() {
     export "$_var"
     unset _var
 }
+
+# Wrapper helpers -------------------------------------------------------------
+
+complete_alias() {
+    case "$SHELL_CMD" in
+        bash)
+            # shellcheck disable=SC2039
+            _prior_complete="$(command complete -p 2>/dev/null | command grep " $2$")"
+            [ $? -eq 0 ] || return
+            eval "$(printf %s "$_prior_complete" | sed "s/ $2\$//") '$1'"
+            ;;
+        zsh | -zsh)
+            if [ "$(whence -w "_$2" | cut -d ' ' -f 2)" = 'function' ]; then
+                compdef "_$2" "$1"="$2"
+            fi
+            ;;
+        *) return 1
+    esac
+}
+
+unalias_if_exists() {
+    alias "$1" >/dev/null 2>&1 && unalias "$1"
+}
