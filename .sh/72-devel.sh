@@ -20,10 +20,6 @@ PYENVS="$(printf \
     "$HOME"/.pyenv/py2prod \
     "$PYENVS")"
 
-my() {
-    mysql "$@"
-}
-
 no_re() {
     RAILS_ENV='' "$@"
 }
@@ -54,11 +50,15 @@ bi() {
     bundle install "$@"
 }
 
-# FIXME: make wrappers work with completion and subshells
-#unalias g
-#g() {
-#    git "$@"
-#}
+unalias_if_exists g
+g() {
+    git "$@"
+}
+complete_alias g git
+
+my() {
+    mysql "$@"
+}
 
 pryr() {
     RUBYOPT=-rpry-rescue/peek/quit "$@"
@@ -68,18 +68,17 @@ rspec() {
     re_t command rspec "$@"
 }
 
-# FIXME: make wrappers work with completion and subshells
-alias v='vim -p'
-#unalias v
-#v() {
-#    vim -p "$@"
-#}
+unalias_if_exists v
+v() {
+    vim -p "$@"
+}
+complete_alias v vim
 
-# FIXME: make wrappers work with completion and subshells
-alias vi=vim
-#vi() {
-#    vim "$@"
-#}
+unalias_if_exists vi
+vi() {
+    vim "$@"
+}
+complete_alias vi vim
 
 vq() {
     _tmpdir="$(mktemp -d -t vg.XXXXXXXX)"
@@ -89,6 +88,7 @@ vq() {
     vim -q "$_pipe"
     unset _tmpdir _pipe
 }
+complete_alias vq vim
 
 vsl() {
     vim +SessionList +only
