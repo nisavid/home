@@ -18,16 +18,3 @@ if [[ "${BASH_VERSINFO[0]}" -ge 4 ]]; then
     shopt -s checkjobs
     shopt -s globstar
 fi
-
-# Completion ------------------------------------------------------------------
-
-if [[ -f /etc/bash_completion ]] && ! shopt -oq posix; then
-    # shellcheck disable=SC1091
-    source /etc/bash_completion
-elif [[ -f "$BREW_PREFIX"/etc/bash_completion ]]; then
-    # shellcheck disable=SC1090
-    source "$BREW_PREFIX"/etc/bash_completion
-elif [[ -f /opt/local/etc/profile.d/bash_completion.sh ]]; then
-    # shellcheck disable=SC1091
-    source /opt/local/etc/profile.d/bash_completion.sh
-fi
