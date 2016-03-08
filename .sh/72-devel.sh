@@ -20,10 +20,6 @@ PYENVS="$(printf \
     "$HOME"/.pyenv/py2prod \
     "$PYENVS")"
 
-my() {
-    mysql "$@"
-}
-
 no_re() {
     RAILS_ENV='' "$@"
 }
@@ -59,6 +55,10 @@ bi() {
 #g() {
 #    git "$@"
 #}
+
+my() {
+    mysql "$@"
+}
 
 pryr() {
     RUBYOPT=-rpry-rescue/peek/quit "$@"
