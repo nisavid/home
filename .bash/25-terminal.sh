@@ -1,9 +1,8 @@
+#!/bin/bash
 # Bash configuration | terminal setup
-
 
 [[ $- == *i* ]] || return
 # Interactive shell -----------------------------------------------------------
-
 
 # shell options
 # see: http://wiki.bash-hackers.org/internals/shell_options
@@ -18,14 +17,4 @@ if [[ "${BASH_VERSINFO[0]}" -ge 4 ]]; then
     shopt -s autocd
     shopt -s checkjobs
     shopt -s globstar
-fi
-
-
-# command and argument completion
-if [[ -f /etc/bash_completion ]] && ! shopt -oq posix; then
-    . /etc/bash_completion
-elif [[ -f "$BREW_PREFIX"/etc/bash_completion ]]; then
-    . "$BREW_PREFIX"/etc/bash_completion
-elif [[ -f /opt/local/etc/profile.d/bash_completion.sh ]]; then
-    . /opt/local/etc/profile.d/bash_completion.sh
 fi

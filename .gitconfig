@@ -62,8 +62,8 @@
 	lgs1 = log --stat -1
 	lgsd = log --stat --patch
 	lgsd1 = log --stat --patch -1
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lol = log --graph --decorate --format=oneline --abbrev-commit
+	lola = log --graph --decorate --format=oneline --abbrev-commit --all
 	ls = ls-files
 	mg = merge
 	mgf = merge --ff-only

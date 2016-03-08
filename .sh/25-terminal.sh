@@ -84,3 +84,51 @@ export TERM
 export SCREEN_COLORS
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Completion ------------------------------------------------------------------
+
+# load the system's shell completions
+# NOTE:
+#   this must be here, instead of in the shell-specific directories, so that the completions
+#   can be referenced in downstream shell-agnostic settings, such as those that use
+#   complete_alias
+case "$SHELL_CMD" in
+    bash)
+        # shellcheck disable=SC2039
+        if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+            # shellcheck disable=SC1091
+            . /etc/bash_completion
+        elif [ -f "$BREW_PREFIX"/etc/bash_completion ]; then
+            # shellcheck disable=SC1090
+            . "$BREW_PREFIX"/etc/bash_completion
+        elif [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+            # shellcheck disable=SC1091
+            . /opt/local/etc/profile.d/bash_completion.sh
+        fi
+
+        if [ -d "$BREW_PREFIX"/etc/bash_completion.d ]; then
+            for _rc in "$BREW_PREFIX"/etc/bash_completion.d/*; do
+                # shellcheck disable=SC1090
+                . "$_rc"
+            done
+        fi
+        ;;
+    zsh | -zsh)
+        autoload -Uz bashcompinit
+        bashcompinit -i
+
+        if [ -d "$BREW_PREFIX"/etc/bash_completion.d ]; then
+            for _rc in "$BREW_PREFIX"/etc/bash_completion.d/*; do
+                _basename="$(basename "$_rc" | sed 's/\.[^\.]\{1,\}//')"
+                if [ -n "$(find "$BREW_PREFIX/share/zsh/site-functions" \
+                                -name "$_basename.*")" ]; then
+                    continue
+                fi
+
+                # shellcheck disable=SC1090
+                . "$_rc"
+            done
+            unset _rc _basename
+        fi
+        ;;
+esac
