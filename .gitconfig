@@ -72,7 +72,9 @@
 	mgma = merge master
 	mgnf = merge --no-ff
 	pl = pull
+	prune-tags = !git tag --list | xargs git tag --delete && git fetch --tags
 	ps = push
+	psa = push --all
 	pscb = push-current-branch
 	psct = push-current-tag
 	pso = push origin
