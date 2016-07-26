@@ -153,8 +153,44 @@ vsl() {
     vim +SessionList +only
 }
 
-zgm() {
-    no_re zeus generate migration
+z() {
+    if [ $# -lt 1 ]; then
+        no_re zeus
+    fi
+
+    case "$1" in
+        dbm)
+            shift
+            no_re zeus rake db:migrate "$@"
+            ;;
+        dbmd)
+            shift
+            no_re zeus rake db:migrate:down "$@"
+            ;;
+        dbms)
+            shift
+            no_re zeus rake db:migrate:status "$@"
+            ;;
+        dbmu)
+            shift
+            no_re zeus rake db:migrate:up "$@"
+            ;;
+        gm)
+            shift
+            no_re zeus generate migration "$@"
+            ;;
+        rk)
+            shift
+            no_re zeus rake "$@"
+            ;;
+        st)
+            shift
+            zeus start "$@"
+            ;;
+        *)
+            no_re zeus "$@"
+            ;;
+    esac
 }
 
 # Python
