@@ -6,6 +6,9 @@
 	safecrlf = warn
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore.global
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[interactive]
+	diffFilter = diff-so-fancy
 [branch]
 	autosetuprebase = always
 [diff]
@@ -46,10 +49,11 @@
 	co- = checkout -
 	cob = checkout -b
 	coma = checkout master
-	d = diff --word-diff=color
-	dc = diff --word-diff=color --cached
-	dcs = diff --word-diff=color --cached --stat
-	ds = diff --word-diff=color --stat
+	d = diff
+	dc = diff --cached
+	dcs = diff --cached --stat
+	des = describe --contains
+	ds = diff --stat
 	f = fetch
 	g = grep
 	l = log
