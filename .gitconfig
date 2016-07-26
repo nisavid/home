@@ -85,12 +85,13 @@
 	rshardma = reset --hard master
 	rshardup = reset --hard @{upstream}
 	s = status
-	st = stash
-	sta = stash apply
-	stl = stash list
-	stp = stash pop
-	sts = stash show
-	stsp = stash show --patch
+	ss = stash
+	ssa = stash apply
+	ssl = stash list
+	ssp = stash pop
+	sss = stash show
+	sssp = stash show --patch
+	sssv = stash save
 [color]
 	branch = auto
 	diff = auto
