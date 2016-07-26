@@ -6,6 +6,7 @@
 export ANSIBLE_HOSTS='/usr/local/bin/ansible-ec2'
 export EC2_HOME='/usr/local/ec2'
 path_affix pre "$EC2_HOME/bin"
+export MYSQL_PS1="\u@\h \d> "
 export RAILS_ENV='development'
 export RI='--format ansi'
 export RIPDIR='/home/nisavid/.rip'
