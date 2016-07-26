@@ -6,4 +6,7 @@ current_tag="$(git tag --points-at HEAD)"
 
 # FIXME: ensure only one tag
 
-git push -u origin "$current_tag"
+remote=origin
+[ $# -ge 1 ] && remote="$1"
+
+git push --no-verify "$remote" "$current_tag"

@@ -6,4 +6,7 @@ current_branch="$(git symbolic-ref --short HEAD)"
 
 # FIXME: ensure only one branch
 
-git push -u origin "$current_branch"
+remote=origin
+[ $# -ge 1 ] && remote="$1"
+
+git push -u "$remote" "$current_branch"

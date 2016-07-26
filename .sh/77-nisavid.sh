@@ -4,7 +4,8 @@
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
-# Vim sessions
+# Vim sessions ----------------------------------------------------------------
+
 alias vbf="vim '+SessionOpen bedframe'"
 alias vbfa="vim '+SessionOpen bedframe-auth'"
 alias vdl="vim '+SessionOpen deli'"

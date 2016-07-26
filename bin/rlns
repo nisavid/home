@@ -1,0 +1,48 @@
+#!/bin/bash
+
+usage="\
+usage: $0 [-f] TARGET LINK_NAME
+  or:  $0 [-f] TARGET
+  or:  $0 [-f] TARGET... DIRECTORY
+
+Shortcut for \`ln -s\`, replacing TARGET with \`realpath TARGET\`."
+
+function main {
+    for arg in "$@"; do
+        if [[ "$arg" = '--help' ]]; then
+            echo "$usage"
+            exit
+        fi
+    done
+
+    if [[ $# -lt 1 ]]; then
+        echo "$usage" >&2
+        exit 2
+    fi
+
+    case "$1" in
+        -f)
+            force=true
+            shift
+            ;;
+    esac
+
+    lns_cmd='ln -s'
+    [[ "$force" ]] && lns_cmd+='f'
+
+    case $# in
+        1 | 2)
+            target="$1"
+            shift
+            eval "$lns_cmd" "$(realpath "$target")" "$@"
+            ;;
+        *)
+            for _ in $(seq 1 $(($# - 1))); do
+                target="$1"
+                shift
+                realpath "$target"
+            done | xargs eval "$lns_cmd" "$@"
+    esac
+}
+
+main "$@"
