@@ -7,6 +7,9 @@
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore.global
 	askpass = /usr/bin/ksshaskpass
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[interactive]
+	diffFilter = diff-so-fancy
 [branch]
 	autosetuprebase = always
 [diff]
@@ -48,10 +51,11 @@
 	co- = checkout -
 	cob = checkout -b
 	coma = checkout master
-	d = diff --word-diff=color
-	dc = diff --word-diff=color --cached
-	dcs = diff --word-diff=color --cached --stat
-	ds = diff --word-diff=color --stat
+	d = diff
+	dc = diff --cached
+	dcs = diff --cached --stat
+	des = describe --contains
+	ds = diff --stat
 	f = fetch
 	g = grep
 	l = log
@@ -70,7 +74,9 @@
 	mgma = merge master
 	mgnf = merge --no-ff
 	pl = pull
+	prune-tags = !git tag --list | xargs git tag --delete && git fetch --tags
 	ps = push
+	psa = push --all
 	pscb = push-current-branch
 	psct = push-current-tag
 	pso = push origin
@@ -87,12 +93,13 @@
 	rshardma = reset --hard master
 	rshardup = reset --hard @{upstream}
 	s = status
-	st = stash
-	sta = stash apply
-	stl = stash list
-	stp = stash pop
-	sts = stash show
-	stsp = stash show --patch
+	ss = stash
+	ssa = stash apply
+	ssl = stash list
+	ssp = stash pop
+	sss = stash show
+	sssp = stash show --patch
+	sssv = stash save
 [color]
 	branch = auto
 	diff = auto
