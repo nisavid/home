@@ -5,6 +5,8 @@
 
 SHELL_CMD="$(ps -o comm -p $$ | tail -n +2)"
 export SHELL_CMD
+SHELL_CMD_NAME="$(basename "$(printf %s "$SHELL_CMD" | sed 's|^-||')")"
+export SHELL_CMD_NAME
 
 strlist() {
     [ $# -eq 0 ] && return
@@ -69,7 +71,7 @@ strlist_len() {
 
 PRE_SHRCS=''
 SHRC_DIRS="$HOME"/.sh
-case "$SHELL_CMD" in
+case "$SHELL_CMD_NAME" in
     bash)
         PRE_SHRCS="$(strlist /etc/bashrc /etc/bash.bashrc /etc/bash/bashrc)"
         SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.bash)"
@@ -87,7 +89,7 @@ case "$SHELL_CMD" in
         SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.csh "$HOME"/.tcsh)"
         export SHELL_NAME='tcsh'
         ;;
-    zsh | -zsh)
+    zsh)
         SHRC_DIRS="$(strlist "$SHRC_DIRS" "$HOME"/.zsh)"
         export SHELL_NAME='Zsh'
         ;;
