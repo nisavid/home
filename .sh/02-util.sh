@@ -17,6 +17,10 @@ in_dir() {
     cd "$1" || return
     shift
 
+    # FIXME:
+    #   use this, but with proper quoting, to ensure that the following cd
+    #   always works
+    #eval "$@"
     "$@"
     _ret_=$?
 
