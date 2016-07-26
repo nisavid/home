@@ -20,6 +20,25 @@ PYENVS="$(printf \
     "$HOME"/.pyenv/py2prod \
     "$PYENVS")"
 
+# Shell option helpers --------------------------------------------------------
+
+using_ksh_arrays() {
+    # Zsh: ensure that array indices start at 0
+    if [ "$SHELL_CMD_NAME" = 'zsh' ]; then
+        _ksharrays_prev_="$(setopt | command grep '^ksharrays$')"
+        setopt ksh_arrays
+    fi
+
+    "$@" || _ret_=$?
+
+    if [ "$SHELL_CMD_NAME" = 'zsh' ] && [ ! "$_ksharrays_prev_" ]; then
+        setopt no_ksh_arrays
+    fi
+
+    unset _ksharrays_prev_
+    return $_ret_
+}
+
 # Environment variable helpers ------------------------------------------------
 
 no_re() {
@@ -37,6 +56,23 @@ re_p() {
 re_t() {
     # shellcheck disable=SC2037
     RAILS_ENV=test "$@"
+}
+
+# Path helpers ----------------------------------------------------------------
+
+cmd_path() {
+    command command -v "$@"
+}
+
+rvm_env_cmd_path() {
+    _env_="$1"
+    shift
+
+    rvm "$_env_" 'do' command -v "$@"
+
+    ret=$?
+    unset _env_
+    return $ret
 }
 
 [ -t 0 ] || return

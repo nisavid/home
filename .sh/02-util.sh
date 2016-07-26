@@ -11,6 +11,14 @@ quote() {
     printf %s "$1" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/'/"
 }
 
+quote_all() {
+    while [ $# -ne 0 ]; do
+        quote "$1"
+        shift
+        [ $# -ne 0 ] && printf %s ' '
+    done
+}
+
 # Directories -----------------------------------------------------------------
 
 in_dir() {
