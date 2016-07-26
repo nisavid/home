@@ -20,6 +20,8 @@ PYENVS="$(printf \
     "$HOME"/.pyenv/py2prod \
     "$PYENVS")"
 
+# Environment variable helpers ------------------------------------------------
+
 no_re() {
     RAILS_ENV='' "$@"
 }

@@ -18,42 +18,42 @@ in_dir() {
     shift
 
     "$@"
-    _ret=$?
+    _ret_=$?
 
     cd - >/dev/null || return
 
-    return $_ret
+    return $_ret_
 }
 
 # Variable manipulation -------------------------------------------------------
 
 affix_to_path_var() {
-    _var="$1"
-    _position="$2"
-    _entry="$3"
+    _var_="$1"
+    _position_="$2"
+    _entry_="$3"
 
-    [ ! -d "$_entry" ] && { unset _var _position _entry; return; }
+    [ ! -d "$_entry_" ] && { unset _var_ _position_ _entry_; return; }
 
     # strip entry from beginning, middle, and end
-    _value="$(eval "printf %s \$$_var")"
-    _value="$(printf %s "${_value#${_entry}:}" | sed "s|:$_entry||g")"
-    eval "$_var=$_value"
+    _value_="$(eval "printf %s \$$_var_")"
+    _value_="$(printf %s "${_value_#${_entry_}:}" | sed "s|:$_entry_||g")"
+    eval "$_var_=$_value_"
 
-    case "$_position" in
+    case "$_position_" in
         pre)
-            eval "$_var=$_entry:$_value"
+            eval "$_var_=$_entry_:$_value_"
             ;;
         post)
-            eval "$_var=$_value:$_entry"
+            eval "$_var_=$_value_:$_entry_"
             ;;
         *)
             ;;
     esac
-    unset _position _entry _value
+    unset _position_ _entry_ _value_
 
     # shellcheck disable=SC2163
-    export "$_var"
-    unset _var
+    export "$_var_"
+    unset _var_
 }
 
 # Wrapper helpers -------------------------------------------------------------
