@@ -103,6 +103,11 @@ my() {
     mysql "$@"
 }
 
+unalias_if_exists npm
+npm() {
+    node --max-old-space-size=4000 /usr/local/bin/npm "$@"
+}
+
 pryr() {
     RUBYOPT=-rpry-rescue/peek/quit "$@"
 }
