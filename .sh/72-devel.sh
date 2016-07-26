@@ -89,6 +89,10 @@ bi() {
     bundle install "$@"
 }
 
+bu() {
+    bundle update "$@"
+}
+
 unalias_if_exists g
 g() {
     git "$@"
