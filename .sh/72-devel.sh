@@ -107,6 +107,8 @@ rspec() {
     re_t command rspec "$@"
 }
 
+unalias_if_exists ru
+
 unalias_if_exists v
 v() {
     vim -p "$@"
