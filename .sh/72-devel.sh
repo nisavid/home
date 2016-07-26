@@ -135,6 +135,15 @@ vq() {
 }
 complete_alias vq vim
 
+vso() {
+    if [ $# -lt 1 ]; then
+        vsl
+        return
+    fi
+
+    vim "+SessionOpen $1" "+let &titlestring = 'vso $1'" "+set title"
+}
+
 vsl() {
     vim +SessionList +only
 }
