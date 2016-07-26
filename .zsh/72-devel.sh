@@ -1,5 +1,8 @@
 # Zsh configuration | development
 
+[[ $- == *i* ]] || return
+# Interactive shell -----------------------------------------------------------
+
 # Completion ------------------------------------------------------------------
 
 _aws_completer="$(command -v aws_zsh_completer.sh)"
