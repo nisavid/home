@@ -117,7 +117,10 @@ pryr() {
     RUBYOPT=-rpry-rescue/peek/quit "$@"
 }
 
-alias pup='pup --color'
+unalias_if_exists pup
+pup() {
+    command pup --color "$@"
+}
 
 unalias_if_exists rspec
 rspec() {
