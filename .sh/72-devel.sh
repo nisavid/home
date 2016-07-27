@@ -81,14 +81,17 @@ rvm_env_cmd_path() {
 
 # Developer tools -------------------------------------------------------------
 
+unalias_if_exists be
 be() {
     bundle exec "$@"
 }
 
+unalias_if_exists bi
 bi() {
     bundle install "$@"
 }
 
+unalias_if_exists bu
 bu() {
     bundle update "$@"
 }
@@ -99,6 +102,7 @@ g() {
 }
 complete_alias g git
 
+unalias_if_exists my
 my() {
     mysql "$@"
 }
@@ -108,10 +112,14 @@ npm() {
     node --max-old-space-size=4000 /usr/local/bin/npm "$@"
 }
 
+unalias_if_exists pryr
 pryr() {
     RUBYOPT=-rpry-rescue/peek/quit "$@"
 }
 
+alias pup='pup --color'
+
+unalias_if_exists rspec
 rspec() {
     re_t command rspec "$@"
 }
@@ -130,6 +138,7 @@ vi() {
 }
 complete_alias vi vim
 
+unalias_if_exists vq
 vq() {
     _tmpdir="$(mktemp -d -t vg.XXXXXXXX)"
     _pipe="$_tmpdir"/pipe
@@ -140,6 +149,12 @@ vq() {
 }
 complete_alias vq vim
 
+unalias_if_exists vsl
+vsl() {
+    vim +SessionList +only
+}
+
+unalias_if_exists vso
 vso() {
     if [ $# -lt 1 ]; then
         vsl
@@ -149,10 +164,7 @@ vso() {
     vim "+SessionOpen $1" "+let &titlestring = 'vso $1'" "+set title"
 }
 
-vsl() {
-    vim +SessionList +only
-}
-
+unalias_if_exists z
 z() {
     if [ $# -lt 1 ]; then
         no_re zeus
