@@ -4,15 +4,30 @@
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
+# Units -----------------------------------------------------------------------
+
+unalias_if_exists ls
 if [ -x "$(which dircolors)" ]; then
-    alias ls='ls --color=auto --si'
+    ls() {
+        command ls --color=auto --si "$@"
+    }
 else
-    alias ls='ls --si'
+    ls() {
+        command ls --si "$@"
+    }
 fi
 
-alias df='df --si'
-alias du='du --si'
+unalias_if_exists df
+df() {
+    command df --si "$@"
+}
 
+unalias_if_exists du
+du() {
+    command du --si "$@"
+}
+
+unalias_if_exists date
 date() {
     for arg in "$@"; do
         if echo "$arg" | grep -q '^+'; then
