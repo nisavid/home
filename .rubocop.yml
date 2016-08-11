@@ -1,20 +1,27 @@
+---
 Lint/ParenthesesAsGroupedExpression:
-    Enabled: false
+  Enabled: false
 
 Metrics/LineLength:
-    Enabled: false
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Style/ClassAndModuleChildren:
+  Enabled: false
 
 Style/Documentation:
-    Enabled: false
-
-Style/EachWithObject:
-    Enabled: false
+  Enabled: false
 
 Style/LeadingCommentSpace:
-    Enabled: false
+  Enabled: false
 
 Style/SingleLineBlockParams:
-    Enabled: false
+  Enabled: false
 
-Style/TrailingComma:
-    EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
