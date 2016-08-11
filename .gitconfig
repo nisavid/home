@@ -20,6 +20,7 @@
 [log]
 	date = iso
 [merge]
+	log = 100
 	tool = kdiff3
 [pull]
 	rebase = preserve
