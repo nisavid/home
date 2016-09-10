@@ -7,11 +7,8 @@ export ANSIBLE_HOSTS='/usr/local/bin/ansible-ec2'
 export EC2_HOME='/usr/local/ec2'
 path_affix pre "$EC2_HOME/bin"
 export MYSQL_PS1="\u@\h \d> "
-export RAILS_ENV='development'
-export RI='--format ansi'
-export RIPDIR='/home/nisavid/.rip'
-export RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
-path_affix post "$RIPDIR/active/bin"
+
+# Python environment ----------------------------------------------------------
 
 PYENVS="$(printf \
     '%s:%s:%s:%s:%s' \
@@ -20,6 +17,20 @@ PYENVS="$(printf \
     "$HOME"/.pyenv/py2devel \
     "$HOME"/.pyenv/py2prod \
     "$PYENVS")"
+
+# Ruby environment ------------------------------------------------------------
+
+export RAILS_ENV='development'
+export RI='--format ansi'
+export RIPDIR='/home/nisavid/.rip'
+export RUBYDB_OPTS="HOST=localhost PORT=9000"
+export RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
+path_affix post "$RIPDIR/active/bin"
+
+RUBYDB_LIBS="$(printf \
+    '%s:%s' \
+    '/Applications/Komodo IDE 10.app/Contents/SharedSupport/dbgp/rubylib/rdbgp.rb' \
+    "$RUBYDB_LIBS")"
 
 # Shell option helpers --------------------------------------------------------
 
@@ -126,6 +137,12 @@ unalias_if_exists rspec
 rspec() {
     re_t command rspec "$@"
 }
+
+unalias_if_exists rs
+rs() {
+    rspec "$@"
+}
+complete_alias rs rspec
 
 unalias_if_exists ru
 
