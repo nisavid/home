@@ -138,6 +138,12 @@ rspec() {
     re_t command rspec "$@"
 }
 
+unalias_if_exists rs
+rs() {
+    rspec "$@"
+}
+complete_alias rs rspec
+
 unalias_if_exists ru
 
 unalias_if_exists v
