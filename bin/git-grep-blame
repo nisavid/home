@@ -1,0 +1,10 @@
+#!/bin/sh
+
+grep_output="$(git grep "$@")" || exit
+
+printf %s "$grep_output" \
+    | cut -d' ' -f1 \
+    | tr : ' ' \
+    | while read file line; do
+    git blame "$file" -L "$line",+1 --show-name
+done
