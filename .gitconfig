@@ -65,8 +65,8 @@
 	lgs1 = log --stat -1
 	lgsd = log --stat --patch
 	lgsd1 = log --stat --patch -1
-	lol = log --graph --decorate --format=oneline --abbrev-commit
-	lola = log --graph --decorate --format=oneline --abbrev-commit --all
+	lol = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph
+	lola = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph --all
 	ls = ls-files
 	mg = merge
 	mgf = merge --ff-only
