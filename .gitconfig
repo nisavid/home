@@ -31,6 +31,7 @@
 	aa = add --all
 	br = branch
 	brc = symbolic-ref --short HEAD
+	brd = branch --delete
 	cfg = config
 	cfgg = config --global
 	cfgge = config --global --edit
@@ -57,6 +58,7 @@
 	ds = diff --stat
 	f = fetch
 	g = grep
+	gbl = grep-blame
 	l = log
 	lgd = log --patch
 	lgd = log --patch
@@ -65,6 +67,7 @@
 	lgs1 = log --stat -1
 	lgsd = log --stat --patch
 	lgsd1 = log --stat --patch -1
+	lo = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S'
 	lol = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph
 	lola = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph --all
 	ls = ls-files
@@ -78,6 +81,7 @@
 	psa = push --all
 	pscb = push-current-branch
 	psct = push-current-tag
+	psf = push --force
 	pso = push origin
 	rb = rebase
 	rba = rebase --abort
@@ -94,6 +98,7 @@
 	s = status
 	ss = stash
 	ssa = stash apply
+	ssd = stash drop
 	ssl = stash list
 	ssp = stash pop
 	sss = stash show
