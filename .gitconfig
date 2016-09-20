@@ -59,6 +59,10 @@
 	f = fetch
 	g = grep
 	gbl = grep-blame
+	gi = gui
+	gibl = gui blame
+	gibr = gui browser
+	gici = gui citool
 	l = log
 	lgd = log --patch
 	lgd = log --patch
@@ -126,4 +130,11 @@
 	changed = green
 	untracked = cyan
 [gui]
-	fontdiff = -family \"courier new\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	fontui = -family \"Inconsolata LGC for Powerline\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Inconsolata LGC for Powerline\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+	editor = gvim
+[cola]
+	fontdiff = Inconsolata LGC for Powerline,11,-1,5,50,0,0,0,0,0
+	tabwidth = 2
+	textwidth = 92
+	boldheaders = true
