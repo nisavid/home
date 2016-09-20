@@ -146,6 +146,10 @@ complete_alias rs rspec
 
 unalias_if_exists ru
 
+alias dr=tldr
+
+alias drup='tldr --update'
+
 unalias_if_exists v
 v() {
     vim -p "$@"
