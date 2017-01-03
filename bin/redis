@@ -1,0 +1,53 @@
+#!/bin/bash
+
+usage="\
+usage: $0 command
+
+Frontend for redis-cli.
+
+extra commands:
+  delall pattern
+  getall pattern
+  help-commands"
+
+function main {
+    for arg in "$@"; do
+        if [[ "$arg" = '--help' ]]; then
+            echo "$usage"
+            exit
+        fi
+    done
+
+    cmd="$1"
+    case "$cmd" in
+        delall | getall | help-commands)
+            shift
+            "$cmd" "$@" || exit
+            ;;
+        *)
+            redis-cli "$@"
+    esac
+}
+
+function delall {
+    redis-cli keys "$1" | xargs redis-cli del
+}
+
+function getall {
+    keys="$(redis-cli keys "$1")"
+    for key in $keys; do
+        echo -n "$key "
+        redis-cli get "$key"
+    done
+}
+
+function help-commands {
+    redis-cli --no-raw command \
+        | command grep '^[[:digit:]]' \
+        | cut -d' ' -f 3 \
+        | sed 's/^"\(.*\)"$/\1/' \
+        | sort \
+        | xargs -n 1 redis-cli help
+}
+
+main "$@"

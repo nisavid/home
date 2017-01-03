@@ -4,15 +4,18 @@
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
-unalias_if_exists diff
-unalias_if_exists dir
-unalias_if_exists egrep
-unalias_if_exists fgrep
-unalias_if_exists grep
-unalias_if_exists ls
-unalias_if_exists vdir
-
 # Colored output --------------------------------------------------------------
+
+unalias_if_exists diff
+if [ -n "$(command -v colordiff 2> /dev/null)" ]; then
+    diff() {
+        colordiff --unified "$@"
+    }
+else
+    diff() {
+        command diff --unified "$@"
+    }
+fi
 
 if [ -n "$(command -v dircolors 2> /dev/null)" ]; then
     if [ -r "$HOME"/.dircolors ]; then \
@@ -21,38 +24,34 @@ if [ -n "$(command -v dircolors 2> /dev/null)" ]; then
         eval "$(dircolors -b)"
     fi
 
-    ls() {
-        command ls --color=auto "$@"
-    }
-
+    unalias_if_exists dir
     dir() {
         command dir --color=auto "$@"
     }
 
-    vdir() {
-        command vdir --color=auto "$@"
+    unalias_if_exists ls
+    ls() {
+        command ls --color=auto "$@"
     }
 
-    grep() {
-        command grep --color=auto "$@"
+    unalias_if_exists egrep
+    egrep() {
+        command egrep --color=auto "$@"
     }
 
+    unalias_if_exists fgrep
     fgrep() {
         command fgrep --color=auto "$@"
     }
 
-    egrep() {
-        command egrep --color=auto "$@"
+    unalias_if_exists grep
+    grep() {
+        command grep --color=auto "$@"
     }
-fi
 
-if [ -n "$(command -v colordiff 2> /dev/null)" ]; then
-    diff() {
-        colordiff --unified "$@"
-    }
-else
-    diff() {
-        command diff --unified "$@"
+    unalias_if_exists vdir
+    vdir() {
+        command vdir --color=auto "$@"
     }
 fi
 
@@ -111,6 +110,11 @@ mkd() {
     mkdir "$@"
 }
 complete_alias mkd mkdir
+
+unalias_if_exists rg
+rg() {
+    command rg --follow "$@"
+}
 
 # Systems administration ------------------------------------------------------
 
