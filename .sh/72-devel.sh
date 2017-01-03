@@ -140,6 +140,12 @@ pup() {
     command pup --color "$@"
 }
 
+unalias_if_exists pyvenv
+pyvenv() {
+    python3 -m venv "$@"
+}
+complete_alias pyvenv python3
+
 unalias_if_exists rspec
 rspec() {
     re_t command rspec "$@"
