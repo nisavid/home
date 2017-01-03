@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+ffmpeg_input_args=()
+ffmpeg_output_args=()
+
+while read -d '' -r file; do
+    echo "$file"
+    new_file="$(basename -s .aiff "$file").flac"
+    if [[ ! -f "$new_file" ]]; then
+        ffmpeg_input_args+=('-i' "$file")
+        ffmpeg_output_args+=("$new_file")
+    fi
+done < <(find "$@" -print0)
+
+if [[ ${#ffmpeg_output_args} -ne 0 ]]; then
+    # shellcheck disable=SC2086
+    ffmpeg "${ffmpeg_input_args[@]}" "${ffmpeg_output_args[@]}"
+fi
