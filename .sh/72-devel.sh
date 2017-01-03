@@ -90,6 +90,8 @@ rvm_env_cmd_path() {
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
+unalias_if_exists rs
+
 # Developer tools -------------------------------------------------------------
 
 unalias_if_exists be
@@ -151,11 +153,11 @@ rspec() {
     re_t command rspec "$@"
 }
 
-unalias_if_exists rs
-rs() {
+unalias_if_exists rsp
+rsp() {
     rspec "$@"
 }
-complete_alias rs rspec
+complete_alias rsp rspec
 
 unalias_if_exists ru
 
