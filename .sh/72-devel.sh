@@ -244,6 +244,10 @@ z() {
     esac
 }
 
+pkill_zeus() {
+  pkill -f '^([^ ]*/)?zeus'
+}
+
 # Python
 alias ipy='ipython'
 
