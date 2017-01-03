@@ -244,6 +244,7 @@ alias pyad='. "$HOME"/.pyenv/devel/bin/activate'
 alias pyad2='. "$HOME"/.pyenv/py2devel/bin/activate'
 alias pyap='. "$HOME"/.pyenv/prod/bin/activate'
 alias pyap2='. "$HOME"/.pyenv/py2prod/bin/activate'
+alias pyd='deactivate'
 
 # systems administration
 alias pipd='"$HOME"/.pyenv/devel/bin/pip'
