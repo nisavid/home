@@ -1,4 +1,7 @@
 ---
+AllCops:
+  TargetRubyVersion: 2.0
+
 Lint/ParenthesesAsGroupedExpression:
   Enabled: false
 
