@@ -1,8 +1,7 @@
 #!/bin/sh
-# Shell configuration | customizations of Python commands
+# Shell configuration | Homebrew/Linuxbrew commands
 
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
-# shells
-alias pysh='ipython --profile=pysh'
+alias bubu='bubo && bubc && brew doctor'

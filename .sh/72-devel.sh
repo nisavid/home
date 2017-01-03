@@ -90,6 +90,8 @@ rvm_env_cmd_path() {
 [ -t 0 ] || return
 # Interactive shell -----------------------------------------------------------
 
+unalias_if_exists rs
+
 # Developer tools -------------------------------------------------------------
 
 unalias_if_exists be
@@ -117,6 +119,13 @@ unalias_if_exists my
 my() {
     mysql "$@"
 }
+complete_alias my mysql
+
+my_last_fk_error() {
+    # shellcheck disable=SC2059
+    printf "$(mysql -e 'SHOW ENGINE INNODB STATUS')" \
+        | sed -ne '/^LATEST FOREIGN KEY ERROR$/,/^----/{/ERROR/{n;n};/----/{q};p}'
+}
 
 unalias_if_exists npm
 npm() {
@@ -133,16 +142,22 @@ pup() {
     command pup --color "$@"
 }
 
+unalias_if_exists pyvenv
+pyvenv() {
+    python3 -m venv "$@"
+}
+complete_alias pyvenv python3
+
 unalias_if_exists rspec
 rspec() {
     re_t command rspec "$@"
 }
 
-unalias_if_exists rs
-rs() {
+unalias_if_exists rsp
+rsp() {
     rspec "$@"
 }
-complete_alias rs rspec
+complete_alias rsp rspec
 
 unalias_if_exists ru
 
@@ -229,6 +244,10 @@ z() {
     esac
 }
 
+pkill_zeus() {
+  pkill -f '^([^ ]*/)?zeus'
+}
+
 # Python
 alias ipy='ipython'
 
@@ -237,6 +256,7 @@ alias pyad='. "$HOME"/.pyenv/devel/bin/activate'
 alias pyad2='. "$HOME"/.pyenv/py2devel/bin/activate'
 alias pyap='. "$HOME"/.pyenv/prod/bin/activate'
 alias pyap2='. "$HOME"/.pyenv/py2prod/bin/activate'
+alias pyd='deactivate'
 
 # systems administration
 alias pipd='"$HOME"/.pyenv/devel/bin/pip'
