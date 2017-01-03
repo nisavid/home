@@ -119,6 +119,12 @@ my() {
 }
 complete_alias my mysql
 
+my_last_fk_error() {
+    # shellcheck disable=SC2059
+    printf "$(mysql -e 'SHOW ENGINE INNODB STATUS')" \
+        | sed -ne '/^LATEST FOREIGN KEY ERROR$/,/^----/{/ERROR/{n;n};/----/{q};p}'
+}
+
 unalias_if_exists npm
 npm() {
     node --max-old-space-size=4000 /usr/local/bin/npm "$@"
