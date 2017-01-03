@@ -111,6 +111,11 @@ mkd() {
 }
 complete_alias mkd mkdir
 
+unalias_if_exists rg
+rg() {
+    command rg --follow "$@"
+}
+
 # Systems administration ------------------------------------------------------
 
 # make the current user's aliases available to sudo
