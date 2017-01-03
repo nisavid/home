@@ -117,6 +117,7 @@ unalias_if_exists my
 my() {
     mysql "$@"
 }
+complete_alias my mysql
 
 unalias_if_exists npm
 npm() {
