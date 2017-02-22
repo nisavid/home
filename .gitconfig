@@ -75,6 +75,7 @@
 	lgsd1 = log --stat --patch -1
 	lo = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S'
 	lol = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph
+	lol1 = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph -1
 	lola = log --format='%C(yellow)%h %C(blue)%aN %C(cyan)%ad%C(red)%d %C()%s' --date=format-local:'%Y-%m-%d %H:%M:%S' --graph --all
 	ls = ls-files
 	mg = merge
