@@ -126,7 +126,7 @@ case "$SHELL_CMD" in
                 fi
 
                 # shellcheck disable=SC1090
-                . "$_rc"
+                . "$_rc" 2>/dev/null
             done
             unset _rc _basename
         fi
