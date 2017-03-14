@@ -6,16 +6,7 @@
 
 # Units -----------------------------------------------------------------------
 
-unalias_if_exists ls
-if [ -x "$(which dircolors)" ]; then
-    ls() {
-        command ls --color=auto --si "$@"
-    }
-else
-    ls() {
-        command ls --si "$@"
-    }
-fi
+LS_ARGS="$(printf %s "$LS_ARGS --si" | xargs)"
 
 unalias_if_exists df
 df() {
