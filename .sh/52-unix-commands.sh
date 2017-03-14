@@ -29,10 +29,7 @@ if [ -n "$(command -v dircolors 2> /dev/null)" ]; then
         command dir --color=auto "$@"
     }
 
-    unalias_if_exists ls
-    ls() {
-        command ls --color=auto "$@"
-    }
+    LS_ARGS="$(printf %s "$LS_ARGS --color=auto" | xargs)"
 
     unalias_if_exists egrep
     egrep() {
