@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+ec2_server_list="$(knife ec2 server list)" || exit
+
+col_indexes=(0)
+header="$(printf %s "$ec2_server_list" 2>/dev/null | head -1)"
+prev_col_index=0
+while [[ -n "$header" ]]; do
+    # NOTE:
+    #   Add a newline, then discount it, because the output of BSD sed ends with a
+    #   newline even if the input doesn't.
+    col_width="$((\
+        $(printf '%s\n' "$header" \
+            | sed -E 's/^(([^ ]| [^ ])+ {2,}).*/\1/' \
+            | wc -m \
+            | sed 's/^[[:space:]]*//') \
+        - 1))"
+    col_index=$((prev_col_index + col_width))
+    col_indexes+=("$col_index")
+    header="${header:$col_width}"
+    prev_col_index="$col_index"
+done
+
+printf %s "$ec2_server_list" | tail -n +2 | while read -r line; do
+    instance_id="$(\
+        i=0;\
+        col_index="${col_indexes[$i]}";\
+        col_width=$((${col_indexes[$((i + 1))]} - col_index));\
+        printf %s "${line:$col_index:$col_width}" | sed 's/ *$//')"
+    hostname="$(\
+        i=1;\
+        col_index="${col_indexes[$i]}";\
+        col_width=$((${col_indexes[$((i + 1))]} - col_index));\
+        printf %s "${line:$col_index:$col_width}" | sed 's/ *$//')"
+    private_ip="$(\
+        i=3;\
+        col_index="${col_indexes[$i]}";\
+        col_width=$((${col_indexes[$((i + 1))]} - col_index));\
+        printf %s "${line:$col_index:$col_width}" | sed 's/ *$//')"
+
+    if [[ -n "$private_ip" ]]; then
+        if [[ -n "$instance_id" ]]; then
+            printf '\nHost %s\nHostname %s\n' "$instance_id" "$private_ip"
+        fi
+        if [[ -n "$hostname" ]]; then
+            printf '\nHost %s\nHostname %s\n' "$hostname" "$private_ip"
+        fi
+    fi
+done
