@@ -53,11 +53,14 @@
 	co- = checkout -
 	cob = checkout -b
 	coma = checkout master
-	d = diff
-	dc = diff --cached
-	dcs = diff --cached --stat
-	des = describe --contains
-	ds = diff --stat
+	d = diff --break-rewrites=/90 --find-renames=30 --find-copies=30
+	dc = diff --break-rewrites=/90 --find-renames=30 --find-copies=30 --cached
+	dcs = diff --break-rewrites=/90 --find-renames=30 --find-copies=30 --cached --stat
+	des = describe --dirty --broken --tags
+	desa = describe --dirty --broken --all
+	desc = describe --contains --dirty --broken --tags
+	desca = describe --contains --dirty --broken --all
+	ds = diff --break-rewrites=/90 --find-renames=30 --find-copies=30 --stat
 	f = fetch
 	g = grep
 	gbl = grep-blame
