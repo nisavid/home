@@ -121,6 +121,12 @@ my() {
 }
 complete_alias my mysql
 
+unalias_if_exists mye
+mye() {
+    my -e "$@"
+}
+complete_alias my mysql
+
 my_last_fk_error() {
     # shellcheck disable=SC2059
     printf "$(mysql -e 'SHOW ENGINE INNODB STATUS')" \
