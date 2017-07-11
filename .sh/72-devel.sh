@@ -115,9 +115,31 @@ g() {
 }
 complete_alias g git
 
+git_web_open() {
+    _remotes_info="$(git remote --verbose show)" || return
+    _origin_uri="$(printf %s "$_remotes_info" \
+        | grep '^origin	' | head -1 | cut -f2 | cut -d' ' -f1)"
+    if ! printf %s "$_origin_uri" | grep -q '^http\(s\)\?://'; then
+        echo origin remote URI is not an HTTP URI: "$_origin_uri" >&2
+        return 1
+    fi
+    app_open "$_origin_uri"
+    unset _remotes_info _origin_uri
+}
+
+gwo() {
+    git_web_open "$@"
+}
+
 unalias_if_exists my
 my() {
     mysql "$@"
+}
+complete_alias my mysql
+
+unalias_if_exists mye
+mye() {
+    my -e "$@"
 }
 complete_alias my mysql
 
