@@ -10,6 +10,10 @@ set -o vi
 # disable interpretation of Ctrl+S as ScrollLock
 stty -ixon
 
+# Colors ----------------------------------------------------------------------
+
+export COLORTERM=truecolor
+
 term_256color="$COLORTERM""$XTERM_VERSION""$ROXTERM_ID""$KONSOLE_DBUS_SESSION"
 SEND_256_COLORS_TO_REMOTE=1
 if [ -n "$term_256color" ] || [ -n "$SEND_256_COLORS_TO_REMOTE" ]; then
