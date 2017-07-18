@@ -282,7 +282,7 @@ alias pyd='deactivate'
 
 # systems administration
 alias pipd='"$HOME"/.pyenv/devel/bin/pip'
-alias pipp='"$HOME"/.pyenv/devel/bin/pip'
+alias pipp='"$HOME"/.pyenv/prod/bin/pip'
 
 # project administration
 alias makepyd='make PYENV="$HOME"/.pyenv/devel'
