@@ -117,14 +117,27 @@ complete_alias g git
 
 git_web_open() {
     _remotes_info="$(git remote --verbose show)" || return
-    _origin_uri="$(printf %s "$_remotes_info" \
+    _uri="$(\
+        printf %s "$_remotes_info" \
         | grep '^origin	' | head -1 | cut -f2 | cut -d' ' -f1)"
-    if ! printf %s "$_origin_uri" | grep -q '^http\(s\)\?://'; then
-        echo origin remote URI is not an HTTP URI: "$_origin_uri" >&2
+    if ! printf %s "$_uri" | grep -q '^http\(s\)\?://'; then
+        echo origin remote URI is not an HTTP URI: "$_uri" >&2
         return 1
     fi
-    app_open "$_origin_uri"
-    unset _remotes_info _origin_uri
+
+    if printf %s "$_uri" | grep -q '^http\(s\)\?://\([^/]\+\.\)\?github\.com/'; then
+        if _current_ref="$(git describe --all 2>/dev/null)"; then
+            if printf %s "$_current_ref" | grep -q '^\(heads\|tags\)/.\+'; then
+                _current_shortref="$(\
+                    printf %s "$_current_ref" | sed 's%^\(heads\|tags\)/%%')"
+                _uri="$_uri/tree/$_current_shortref"
+            fi
+        fi
+    fi
+
+    app_open "$_uri"
+
+    unset _current_ref _current_shortref _remotes_info _uri
 }
 
 gwo() {
