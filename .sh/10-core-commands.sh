@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | core commands
 
 if ! which realpath >/dev/null 2>&1; then

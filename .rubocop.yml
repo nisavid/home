@@ -2,22 +2,19 @@
 AllCops:
   TargetRubyVersion: 2.4
 
+Layout/LeadingCommentSpace:
+  Enabled: false
+
 Lint/ParenthesesAsGroupedExpression:
   Enabled: false
 
 Metrics/LineLength:
   Enabled: false
 
-Rails:
-  Enabled: true
-
 Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/Documentation:
-  Enabled: false
-
-Style/LeadingCommentSpace:
   Enabled: false
 
 Style/SingleLineBlockParams:

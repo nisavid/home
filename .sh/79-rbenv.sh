@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Ruby environment
 
 path_affix post "$HOME/.rvm/bin"
