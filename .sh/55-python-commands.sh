@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | customizations of Python commands
 
 [ -t 0 ] || return

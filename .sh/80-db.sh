@@ -1,3 +1,4 @@
+# shellcheck shell=sh
 # Shell configuration | database interaction
 
 # NOTE: disabled because it breaks 'mysql -e'

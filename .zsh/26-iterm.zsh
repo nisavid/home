@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # iTerm shell integration
 
 # shellcheck disable=SC1090

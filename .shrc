@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration
 
 # Utilities -------------------------------------------------------------------
@@ -145,7 +145,7 @@ while [ -n "$SHRC_DIRS" ] && [ ! "$abort" ]; do
     dir="${SHRC_DIRS%%:*}"
 
     if [ -d "$dir" ]; then
-        for rc in "$dir"/*; do
+        for rc in "$dir"/*.*sh; do
             [ "$_debug" ] && echo sourcing \'"$rc"\' >&2
             # shellcheck disable=SC1090
             . "$rc" || abort=true
