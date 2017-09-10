@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Ivan D Vasin
 
 [ -t 0 ] || return

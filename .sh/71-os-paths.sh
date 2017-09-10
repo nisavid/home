@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Java home
 
 # Java home

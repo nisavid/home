@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | command prompt
 
 [ -t 0 ] || return
