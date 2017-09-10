@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Python environment
 
 while [ -n "$PYENVS" ]; do

@@ -1,4 +1,4 @@
-#!/bin/bash
+# shellcheck shell=bash
 # Bash configuration | development
 
 [[ $- == *i* ]] || return

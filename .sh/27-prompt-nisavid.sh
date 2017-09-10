@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | command prompt | Ivan D Vasin
 
 [ -t 0 ] || return
