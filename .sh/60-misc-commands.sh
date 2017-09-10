@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | miscellaneous commands
 
 # install The Fuck as fx

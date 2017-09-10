@@ -1,1 +1,0 @@
-../.bash/77-nisavid.sh

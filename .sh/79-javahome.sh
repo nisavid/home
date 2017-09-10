@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Java home
 
 while [ -n "$JAVA_HOMES" ] && [ ! "$abort" ]; do
