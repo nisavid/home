@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Zsh configuration | terminal setup | OS X
 
 [[ $- == *i* ]] || return

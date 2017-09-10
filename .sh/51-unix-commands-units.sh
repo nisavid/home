@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Unix commands | SI units
 
 [ -t 0 ] || return

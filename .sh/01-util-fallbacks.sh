@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | fallbacks for standard utilities
 
 if ! command -v realpath >/dev/null 2>&1; then

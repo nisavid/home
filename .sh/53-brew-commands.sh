@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | Homebrew/Linuxbrew commands
 
 [ -t 0 ] || return

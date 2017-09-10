@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | development
 
 # Environment variables -------------------------------------------------------
@@ -119,7 +119,7 @@ git_web_open() {
     _remotes_info="$(git remote --verbose show)" || return
     _uri="$(\
         printf %s "$_remotes_info" \
-        | grep '^origin	' | head -1 | cut -f2 | cut -d' ' -f1)"
+        | grep '^origin	' | head -1 | cut -f2 | cut -d' ' -f1 | sed 's/\.git$//')"
     if ! printf %s "$_uri" | grep -q '^http\(s\)\?://'; then
         echo origin remote URI is not an HTTP URI: "$_uri" >&2
         return 1

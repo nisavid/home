@@ -1,4 +1,4 @@
-#!/bin/sh
+# shellcheck shell=sh
 # Shell configuration | SSH agent
 
 # on Mac, use OS X Keychain
