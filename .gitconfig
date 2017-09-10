@@ -29,6 +29,7 @@
 [alias]
 	a = add --patch
 	aa = add --all
+	au = add --update
 	br = branch
 	brc = symbolic-ref --short HEAD
 	brd = branch --delete
