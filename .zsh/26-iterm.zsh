@@ -1,4 +1,3 @@
-# shellcheck shell=bash
 # Zsh configuration | iTerm shell integration
 
 # shellcheck disable=SC1090
