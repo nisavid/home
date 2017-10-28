@@ -213,7 +213,7 @@ complete_alias vi vim
 
 unalias_if_exists vq
 vq() {
-    _tmpdir="$(mktemp -d -t vg.XXXXXXXX)"
+    _tmpdir="$(mktemp -d -t vq.XXXXXXXX)"
     _pipe="$_tmpdir"/pipe
     mkfifo "$_pipe"
     cat <&0 >"$_pipe" &
