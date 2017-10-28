@@ -24,7 +24,6 @@ export RAILS_ENV='development'
 export RI='--format ansi'
 export RIPDIR='/home/nisavid/.rip'
 export RUBYDB_OPTS="HOST=localhost PORT=9000"
-export RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
 path_affix post "$RIPDIR/active/bin"
 
 RUBYDB_LIBS="$(printf \
