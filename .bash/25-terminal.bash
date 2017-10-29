@@ -1,4 +1,3 @@
-# shellcheck shell=bash
 # Bash configuration | terminal setup
 
 [[ $- == *i* ]] || return

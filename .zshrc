@@ -55,7 +55,7 @@ DISABLE_UPDATE_PROMPT=true
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(catimg colored-man colorize command-not-found compleat dirhistory safe-paste screen zsh-syntax-highlighting history-substring-search adb autopep8 brew coffee common-aliases cp emoji encode64 fabric git git-extras git-flow git-hubflow git-remote-branch gitignore history iwhois jruby jsontools knife knife_ssh mercurial node npm nvm osx pep8 pip postgres pyenv pylint python rails rake redis-cli ruby rvm systemadmin systemd torrent urltools vi-mode vim-interaction virtualenv wd web-search zeus)
+plugins=(catimg colored-man colorize command-not-found compleat dirhistory safe-paste screen zsh-syntax-highlighting history-substring-search zsh-autosuggestions adb autopep8 brew coffee common-aliases cp emoji encode64 fabric git git-extras git-flow git-hubflow git-remote-branch gitignore history iwhois jruby jsontools knife knife_ssh mercurial node npm nvm osx pep8 pip postgres pyenv pylint python rails rake redis-cli ruby rvm systemadmin systemd torrent urltools vi-mode vim-interaction virtualenv wd web-search zeus)
 
 # External settings -----------------------------------------------------------
 
