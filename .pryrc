@@ -10,7 +10,7 @@ Pry::Commands.block_command('enable-pry', 'Enable `binding.pry` feature') do
   ENV['DISABLE_PRY'] = nil
 end
 
-# Looksee ---------------------------------------------------------------------
+# Looksee ----------------------------------------------------------------------------------
 
 begin
   require 'looksee'
@@ -18,13 +18,12 @@ rescue LoadError
 end
 Looksee.editor = 'vim %f +%l' if defined? Looksee
 
-# Hirb ------------------------------------------------------------------------
+# Hirb -------------------------------------------------------------------------------------
 
 begin
   require 'hirb'
 rescue LoadError
-end
-if defined? Hirb
+else
   # from https://github.com/pry/pry/wiki/FAQ#how-can-i-use-the-hirb-gem-with-pry
   # Slightly dirty hack to fully support in-session Hirb.disable/enable toggling
   Hirb::View.instance_eval do
@@ -45,7 +44,7 @@ if defined? Hirb
   Hirb.enable
 end
 
-# Rails -----------------------------------------------------------------------
+# Rails ------------------------------------------------------------------------------------
 
 # load Rails config if running as a Rails console
 load File.dirname(__FILE__) + '/.railsrc' if defined? Rails && Rails.env
