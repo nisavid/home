@@ -12,6 +12,15 @@ Pry::Commands.block_command('enable-pry', 'Enable `binding.pry` feature') do
   ENV['DISABLE_PRY'] = nil
 end
 
+# Awesome Print ----------------------------------------------------------------------------
+
+begin
+  require 'awesome_print'
+rescue LoadError
+else
+  AwesomePrint.pry!
+end
+
 # Looksee ----------------------------------------------------------------------------------
 
 begin
