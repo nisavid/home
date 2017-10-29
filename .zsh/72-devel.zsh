@@ -1,4 +1,3 @@
-# shellcheck shell=bash
 # Zsh configuration | development
 
 [[ $- == *i* ]] || return
