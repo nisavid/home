@@ -24,7 +24,6 @@ export RAILS_ENV='development'
 export RI='--format ansi'
 export RIPDIR='/home/nisavid/.rip'
 export RUBYDB_OPTS="HOST=localhost PORT=9000"
-export RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
 path_affix post "$RIPDIR/active/bin"
 
 RUBYDB_LIBS="$(printf \
@@ -214,7 +213,7 @@ complete_alias vi vim
 
 unalias_if_exists vq
 vq() {
-    _tmpdir="$(mktemp -d -t vg.XXXXXXXX)"
+    _tmpdir="$(mktemp -d -t vq.XXXXXXXX)"
     _pipe="$_tmpdir"/pipe
     mkfifo "$_pipe"
     cat <&0 >"$_pipe" &

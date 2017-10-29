@@ -1,4 +1,3 @@
-# shellcheck shell=bash
 # Zsh configuration | environment variables
 
 [[ $- == *i* ]] || return
