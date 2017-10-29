@@ -1,5 +1,11 @@
 require 'rubygems'
-require 'pry'
 
-Pry.start
-exit
+# Pry --------------------------------------------------------------------------------------
+
+begin
+  require 'pry'
+rescue LoadError
+else
+  Pry.start
+  exit
+end
