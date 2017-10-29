@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 usage="\
-usage: $0 command
+usage: $0 <command>
 
 Frontend for redis-cli.
 
 extra commands:
-  delall pattern
-  getall pattern
+  delall <pattern>
+  getall <pattern>
   help-commands"
 
 function main {
