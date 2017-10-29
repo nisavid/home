@@ -15,8 +15,9 @@ end
 begin
   require 'looksee'
 rescue LoadError
+else
+  Looksee.editor = 'vim %f +%l' if defined? Looksee
 end
-Looksee.editor = 'vim %f +%l' if defined? Looksee
 
 # Hirb -------------------------------------------------------------------------------------
 
